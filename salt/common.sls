@@ -9,3 +9,7 @@ essentials:
       - strace
       - ltrace
       - zsh
+
+unzip:
+  pkg:
+    - installed
