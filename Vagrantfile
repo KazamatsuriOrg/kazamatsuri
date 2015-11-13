@@ -34,6 +34,7 @@ Vagrant.configure(2) do |config|
       salt.bootstrap_options = "-F -c /tmp"
       salt.minion_config = "vagrant/back/salt_minion.yml"
       salt.run_highstate = true
+      salt.colorize = true
     end
   end
   
@@ -52,6 +53,7 @@ Vagrant.configure(2) do |config|
       salt.bootstrap_options = "-F -c /tmp"
       salt.minion_config = "vagrant/web/salt_minion.yml"
       salt.run_highstate = true
+      salt.colorize = true
     end
   end
 end
