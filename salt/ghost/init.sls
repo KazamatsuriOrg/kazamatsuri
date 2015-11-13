@@ -11,3 +11,9 @@
     - user: www-data
     - require:
       - file: /srv/kazamatsuri.org/apps/ghost-{{ pillar['ghost_version'] }}.zip
+
+/srv/kazamatsuri.org/apps/ghost/config.js:
+  file.managed:
+    - source: salt://ghost/config.js
+    - require:
+      - archive: /srv/kazamatsuri.org/apps/ghost
