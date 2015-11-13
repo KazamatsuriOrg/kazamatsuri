@@ -44,3 +44,13 @@ ghost_source:
       - pkg: nodejs
       - archive: ghost_source
       - user: ghost_user
+
+/etc/systemd/system/ghost.service:
+  file.managed:
+    - source: salt://ghost/ghost.service
+
+ghost:
+  service.running:
+    - enable: True
+    - require:
+      - file: /etc/systemd/system/ghost.service
