@@ -6,6 +6,7 @@ base:
   'roles:web':
     - match: grain
     - web_directories
+    - node
     - nginx
     - ghost
 
