@@ -43,7 +43,8 @@ Vagrant.configure(2) do |config|
     set_limits web, cpus: 2, memory: 2048
     
     # Forward ports to the host machine
-    web.vm.network "forwarded_port", guest: 80, host: 8080
+    web.vm.network "forwarded_port", guest: 80, host: 8080      # Nginx
+    web.vm.network "forwarded_port", guest: 2368, host: 2368    # Ghost development
     
     # Create a private network between the machines
     web.vm.network "private_network", ip: "10.10.10.10"
