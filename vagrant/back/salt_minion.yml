@@ -6,5 +6,6 @@ pillar_roots:
   base:
     - /vagrant/pillar
 grains:
+  vagrant: true
   roles:
     - database

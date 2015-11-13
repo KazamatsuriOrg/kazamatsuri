@@ -68,7 +68,7 @@ config = {
         // #### Paths
         // Specify where your content directory lives
         paths: {
-            contentPath: path.join(__dirname, '/content/')
+            contentPath: '/srv/kazamatsuri.org/apps/ghost/content/'
         }
     },
 
