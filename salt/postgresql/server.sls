@@ -12,6 +12,10 @@
     - group: postgres
     - mode: 644
 
+/etc/security/limits.d/postgresql.conf:
+  file.managed:
+    - source: salt://postgresql/limits.conf
+
 postgresql:
   pkg.installed:
     - pkgs:
@@ -25,3 +29,12 @@ postgresql:
     - watch:
       - file: /etc/postgresql/9.4/main/postgresql.conf
       - file: /etc/postgresql/9.4/main/pg_hba.conf
+      - file: /etc/security/limits.d/postgresql.conf
+
+vm.swappiness:
+  sysctl.present:
+    - value: 0
+
+fs.file-max:
+  sysctl.present:
+    - value: 65535
