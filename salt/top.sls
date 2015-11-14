@@ -5,12 +5,13 @@ base:
 
   'roles:web':
     - match: grain
-    - web_directories
+    - postgresql.client
     - node
     - nginx
+    - web_directories
     - ghost.web
 
   'roles:database':
     - match: grain
-    - postgresql
+    - postgresql.server
     - ghost.database
