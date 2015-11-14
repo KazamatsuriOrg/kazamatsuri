@@ -8,7 +8,7 @@ def set_limits(box, cpus: cpus, memory: memory)
     vb.cpus = cpus
   end
   
-  box.vm.provider "vmware" do |vw|
+  box.vm.provider "vmware_fusion" do |vw|
     vw.vmx["memsize"] = memory
     vw.vmx["numvcpus"] = cpus
   end
