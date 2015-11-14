@@ -8,8 +8,9 @@ base:
     - web_directories
     - node
     - nginx
-    - ghost
+    - ghost.web
 
   'roles:database':
     - match: grain
     - postgresql
+    - ghost.database

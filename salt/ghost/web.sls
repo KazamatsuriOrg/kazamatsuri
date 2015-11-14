@@ -54,3 +54,4 @@ ghost:
     - enable: True
     - require:
       - file: /etc/systemd/system/ghost.service
+      - npm: /srv/kazamatsuri.org/apps/ghost/
