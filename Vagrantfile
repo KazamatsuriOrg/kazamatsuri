@@ -22,39 +22,43 @@ Vagrant.configure(2) do |config|
   # Use a Debian 8.2 base box for all machines
   config.vm.box = "box-cutter/debian82"
   
-  config.vm.define "back" do |back|
+  config.vm.define "jena" do |jena|
     # Set resource limits
-    set_limits back, cpus: 2, memory: 1024
+    set_limits jena, cpus: 1, memory: 1024
+    
+    # Forward ports to the host machine
+    jena.vm.network "forwarded_port", guest: 80, host: 8080
     
     # Create a private network between the machines
-    back.vm.network "private_network", ip: "10.10.10.11"
+    jena.vm.network "private_network", ip: "10.10.10.10"
     
     # Provision using Salt
-    back.vm.provision "salt" do |salt|
-      salt.bootstrap_options = "-F -c /tmp"
-      salt.minion_config = "vagrant/back/salt_minion.yml"
+    jena.vm.provision "salt" do |salt|
+      salt.bootstrap_options = "-F -c /tmp -A 127.0.0.1 -i jena"
+      salt.install_master = true
+      salt.minion_config = "vagrant/jena/salt_minion.yml"
+      salt.minion_key = "vagrant/jena/jena.pem"
+      salt.minion_pub = "vagrant/jena/jena.pub"
+      salt.master_config = "vagrant/jena/salt_master.yml"
+      salt.seed_master = { jena: salt.minion_pub }
       salt.run_highstate = true
       salt.colorize = true
     end
   end
   
-  config.vm.define "web" do |web|
-    # Set resource limits
-    set_limits web, cpus: 2, memory: 2048
+  # config.vm.define "web1" do |web|
+  #   # Set resource limits
+  #   set_limits web, cpus: 1, memory: 1024
     
-    # Forward ports to the host machine
-    web.vm.network "forwarded_port", guest: 80, host: 8080      # Nginx
-    web.vm.network "forwarded_port", guest: 2368, host: 2368    # Ghost development
+  #   # Create a private network between the machines
+  #   web.vm.network "private_network", ip: "10.10.10.11"
     
-    # Create a private network between the machines
-    web.vm.network "private_network", ip: "10.10.10.10"
-    
-    # Provision using Salt
-    web.vm.provision "salt" do |salt|
-      salt.bootstrap_options = "-F -c /tmp"
-      salt.minion_config = "vagrant/web/salt_minion.yml"
-      salt.run_highstate = true
-      salt.colorize = true
-    end
-  end
+  #   # Provision using Salt
+  #   web.vm.provision "salt" do |salt|
+  #     salt.bootstrap_options = "-F -c /tmp"
+  #     salt.minion_config = "vagrant/web/salt_minion.yml"
+  #     salt.run_highstate = true
+  #     salt.colorize = true
+  #   end
+  # end
 end
