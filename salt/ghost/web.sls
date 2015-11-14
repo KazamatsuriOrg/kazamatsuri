@@ -7,15 +7,15 @@ ghost_user:
 
 ghost_source:
   file.managed:
-    - name: /srv/kazamatsuri.org/apps/ghost-{{ pillar['ghost_version'] }}.zip
-    - source: https://ghost.org/zip/ghost-{{ pillar['ghost_version'] }}.zip
+    - name: /srv/kazamatsuri.org/apps/ghost-{{ pillar['ghost']['version'] }}.zip
+    - source: https://ghost.org/zip/ghost-{{ pillar['ghost']['version'] }}.zip
     - source_hash: sha1=1a62318a9bbac3a69f34dfb24f2a8e4c577db02a
     - user: ghost
     - require:
       - user: ghost_user
   archive.extracted:
     - name: /srv/kazamatsuri.org/apps/ghost/
-    - source: /srv/kazamatsuri.org/apps/ghost-{{ pillar['ghost_version'] }}.zip
+    - source: /srv/kazamatsuri.org/apps/ghost-{{ pillar['ghost']['version'] }}.zip
     - archive_format: zip
     - user: ghost
     - require:
