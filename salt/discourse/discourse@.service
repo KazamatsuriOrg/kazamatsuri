@@ -1,0 +1,14 @@
+[Unit]
+Description=Discourse (%i)
+Requires=docker.service
+After=docker.service
+
+[Service]
+Type=oneshot
+RemainAfterExit=yes
+WorkingDirectory=/srv/discourse
+ExecStart=/srv/discourse/launcher start %i
+ExecStop=/srv/discourse/launcher stop %i
+
+[Install]
+WantedBy=multi-user.target
