@@ -24,15 +24,11 @@ ghost_source:
       - user: ghost_user
 
 /srv/kazamatsuri.org/apps/ghost/config.js:
-  {% if not grains.get('vagrant', False) %}
   file.managed:
     - source: salt://ghost/config.js
-  {% else %}
-  file.symlink:
-    - target: /vagrant/salt/ghost/config.js
-    - force: True
-  {% endif %}
     - user: ghost
+    - group: ghost
+    - template: jinja
     - require:
       - archive: ghost_source
       - user: ghost_user
@@ -55,3 +51,6 @@ ghost:
     - require:
       - file: /etc/systemd/system/ghost.service
       - npm: /srv/kazamatsuri.org/apps/ghost/
+    - watch:
+      - file: /etc/systemd/system/ghost.service
+      - file: /srv/kazamatsuri.org/apps/ghost/config.js

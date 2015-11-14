@@ -14,9 +14,12 @@ config = {
         url: 'http://kazamatsuri.org',
         mail: {},
         database: {
-            client: 'sqlite3',
+            client: 'pg',
             connection: {
-                filename: '/srv/kazamatsuri.org/apps/ghost/content/data/ghost.db'
+                host: '{{ pillar['ghost']['db_host'] }}',
+                user: 'ghost',
+                password: '{{ pillar['ghost']['db_password'] }}',
+                database: 'ghost',
             },
             debug: false
         },
