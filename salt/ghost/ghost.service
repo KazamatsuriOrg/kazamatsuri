@@ -7,7 +7,7 @@ After=network.target
 User=ghost
 Group=ghost
 Environment=NODE_ENV=production
-WorkingDirectory=/srv/kazamatsuri.org/apps/ghost
+WorkingDirectory=/srv/ghost
 ExecStart=/usr/bin/npm start
 TimeoutSec=10
 

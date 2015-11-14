@@ -1,7 +1,3 @@
-/srv/kazamatsuri.org/apps/:
-  file.directory:
-    - makedirs: True
-
-/srv/kazamatsuri.org/www/:
+/srv/www/:
   file.directory:
     - makedirs: True

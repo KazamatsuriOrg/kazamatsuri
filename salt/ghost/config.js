@@ -71,7 +71,7 @@ config = {
         // #### Paths
         // Specify where your content directory lives
         paths: {
-            contentPath: '/srv/kazamatsuri.org/apps/ghost/content/'
+            contentPath: '/srv/ghost/content/'
         }
     },
 

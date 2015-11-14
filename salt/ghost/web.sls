@@ -7,23 +7,23 @@ ghost_user:
 
 ghost_source:
   file.managed:
-    - name: /srv/kazamatsuri.org/apps/ghost-{{ pillar['ghost']['version'] }}.zip
+    - name: /srv/ghost-{{ pillar['ghost']['version'] }}.zip
     - source: https://ghost.org/zip/ghost-{{ pillar['ghost']['version'] }}.zip
     - source_hash: sha1=1a62318a9bbac3a69f34dfb24f2a8e4c577db02a
     - user: ghost
     - require:
       - user: ghost_user
   archive.extracted:
-    - name: /srv/kazamatsuri.org/apps/ghost/
-    - source: /srv/kazamatsuri.org/apps/ghost-{{ pillar['ghost']['version'] }}.zip
+    - name: /srv/ghost/
+    - source: /srv/ghost-{{ pillar['ghost']['version'] }}.zip
     - archive_format: zip
     - user: ghost
     - require:
       - file: ghost_source
-      - file: /srv/kazamatsuri.org/apps/
+      - file: /srv/
       - user: ghost_user
 
-/srv/kazamatsuri.org/apps/ghost/config.js:
+/srv/ghost/config.js:
   file.managed:
     - source: salt://ghost/config.js
     - user: ghost
@@ -33,7 +33,7 @@ ghost_source:
       - archive: ghost_source
       - user: ghost_user
 
-/srv/kazamatsuri.org/apps/ghost/:
+/srv/ghost/:
   npm.bootstrap:
     - user: ghost
     - require:
@@ -50,7 +50,7 @@ ghost:
     - enable: True
     - require:
       - file: /etc/systemd/system/ghost.service
-      - npm: /srv/kazamatsuri.org/apps/ghost/
+      - npm: /srv/ghost/
     - watch:
       - file: /etc/systemd/system/ghost.service
-      - file: /srv/kazamatsuri.org/apps/ghost/config.js
+      - file: /srv/ghost/config.js

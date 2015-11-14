@@ -7,7 +7,7 @@ server {
 	listen [::]:80 default_server ipv6only=on;
     server_name kazamatsuri.org;
     
-    root /srv/kazamatsuri.org/www;
+    root /srv/www;
     index index.html;
     
     charset utf-8;
@@ -32,19 +32,19 @@ server {
     
     # Bypass Ghost when serving theme assets
     location /assets {
-        alias /srv/kazamatsuri.org/apps/ghost/content/themes/monologue/assets;
+        alias /srv/ghost/content/themes/monologue/assets;
         expires 365d;
     }
     
     # Bypass Ghost when serving internal assets
     location /content {
-        alias /srv/kazamatsuri.org/apps/ghost/content;
+        alias /srv/ghost/content;
         expires 365d;
     }
     
     # Bypass Ghost when servince admin assets
     location /public {
-        alias /srv/kazamatsuri.org/apps/ghost/core/built/public;
+        alias /srv/ghost/core/built/public;
         expires 365d;
     }
     
