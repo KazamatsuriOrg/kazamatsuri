@@ -3,3 +3,4 @@ grains:
   vagrant: true
   roles:
     - database
+    - balancer

@@ -20,3 +20,7 @@ base:
     - postgresql.server
     - ghost.database
     - discourse.data
+
+  'roles:balancer':
+    - match: grain
+    - haproxy
