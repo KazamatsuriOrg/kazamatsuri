@@ -11,5 +11,7 @@ essentials:
       - zsh
 
 unzip:
-  pkg:
-    - installed
+  pkg.installed
+
+apt-transport-https:
+  pkg.installed

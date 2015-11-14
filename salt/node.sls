@@ -1,6 +1,3 @@
-apt-transport-https:
-  pkg.installed
-
 nodesource:
   pkgrepo.managed:
     - name: deb https://deb.nodesource.com/node_0.12 jessie main
