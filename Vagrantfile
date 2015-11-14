@@ -34,7 +34,7 @@ Vagrant.configure(2) do |config|
     
     # Provision using Salt
     jena.vm.provision "salt" do |salt|
-      salt.bootstrap_options = "-F -c /tmp -A 127.0.0.1 -i jena"
+      salt.bootstrap_options = "-F -c /tmp -i jena"
       salt.install_master = true
       salt.minion_config = "vagrant/jena/salt_minion.yml"
       salt.minion_key = "vagrant/jena/jena.pem"
