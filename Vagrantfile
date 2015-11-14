@@ -40,25 +40,25 @@ Vagrant.configure(2) do |config|
       salt.minion_key = "vagrant/jena/jena.pem"
       salt.minion_pub = "vagrant/jena/jena.pub"
       salt.master_config = "vagrant/jena/salt_master.yml"
-      salt.seed_master = { jena: salt.minion_pub }
+      salt.seed_master = {
+        jena: salt.minion_pub,
+        web1: "vagrant/web/web1.pub",
+      }
       salt.run_highstate = true
       salt.colorize = true
     end
   end
   
-  # config.vm.define "web1" do |web|
-  #   # Set resource limits
-  #   set_limits web, cpus: 1, memory: 1024
-    
-  #   # Create a private network between the machines
-  #   web.vm.network "private_network", ip: "10.10.10.11"
-    
-  #   # Provision using Salt
-  #   web.vm.provision "salt" do |salt|
-  #     salt.bootstrap_options = "-F -c /tmp"
-  #     salt.minion_config = "vagrant/web/salt_minion.yml"
-  #     salt.run_highstate = true
-  #     salt.colorize = true
-  #   end
-  # end
+  config.vm.define "web1" do |web|
+    set_limits web, cpus: 1, memory: 1024
+    web.vm.network "private_network", ip: "10.10.10.11"
+    web.vm.provision "salt" do |salt|
+      salt.bootstrap_options = "-F -c /tmp -i web1"
+      salt.minion_config = "vagrant/web/salt_minion.yml"
+      salt.minion_key = "vagrant/web/web1.pem"
+      salt.minion_pub = "vagrant/web/web1.pub"
+      salt.run_highstate = true
+      salt.colorize = true
+    end
+  end
 end
