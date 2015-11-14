@@ -1,4 +1,5 @@
 base:
   '*':
+    - common
     - ghost
     - keys

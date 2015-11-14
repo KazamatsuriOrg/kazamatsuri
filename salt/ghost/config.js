@@ -16,7 +16,7 @@ config = {
         database: {
             client: 'pg',
             connection: {
-                host: '{{ pillar['ghost']['db_host'] }}',
+                host: '{{ pillar['db_host'] }}',
                 user: 'ghost',
                 password: '{{ pillar['ghost']['db_password'] }}',
                 database: 'ghost',
