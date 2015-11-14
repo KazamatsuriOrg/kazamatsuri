@@ -5,10 +5,10 @@ templates:
   - "templates/sshd.template.yml"
   - "templates/web.template.yml"
   # - "templates/web.ratelimited.template.yml"
-  - "templates/web.socketed.template.yml"
+  # - "templates/web.socketed.template.yml"
 
 expose:
-  # - "10080:80"
+  - "10080:80"
   # - "10022:22"
 
 # any extra arguments for Docker?
