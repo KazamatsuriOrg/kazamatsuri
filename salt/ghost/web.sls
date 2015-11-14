@@ -20,7 +20,6 @@ ghost_source:
     - user: ghost
     - require:
       - file: ghost_source
-      - file: /srv/
       - user: ghost_user
 
 /srv/ghost/config.js:

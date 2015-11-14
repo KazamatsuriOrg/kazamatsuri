@@ -4,6 +4,8 @@
     - user: postgres
     - group: postgres
     - mode: 640
+    - require:
+      - pkg: postgresql
 
 /etc/postgresql/9.4/main/postgresql.conf:
   file.managed:
@@ -11,6 +13,8 @@
     - user: postgres
     - group: postgres
     - mode: 644
+    - require:
+      - pkg: postgresql
 
 /etc/security/limits.d/postgresql.conf:
   file.managed:
