@@ -5,6 +5,7 @@ base:
 
   'roles:web':
     - match: grain
+    - docker
     - node
     - postgresql.client
     - nginx
@@ -14,5 +15,6 @@ base:
 
   'roles:database':
     - match: grain
+    - docker
     - postgresql.server
     - ghost.database
