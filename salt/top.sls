@@ -5,8 +5,8 @@ base:
 
   'roles:web':
     - match: grain
-    - postgresql.client
     - node
+    - postgresql.client
     - nginx
     - web_directories
     - ghost.web
