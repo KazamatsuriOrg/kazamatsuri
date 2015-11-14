@@ -51,7 +51,6 @@ Vagrant.configure(2) do |config|
   
   config.vm.define "web1" do |web|
     set_limits web, cpus: 1, memory: 1024
-    web.vm.network "forwarded_port", guest: 80, host: 8081
     web.vm.network "private_network", ip: "10.10.10.11"
     web.vm.provision "salt" do |salt|
       salt.bootstrap_options = "-F -c /tmp -i web1"
