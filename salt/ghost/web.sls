@@ -47,6 +47,22 @@ ghost_source:
     - cwd: /srv/ghost/
     - creates: /srv/ghost/node_modules
 
+/srv/ghost/content/:
+  file.directory:
+    - user: ghost
+    - group: ghost
+    - mode: 775
+    - require:
+      - cmd: ghost_source
+
+/srv/ghost/content/data/:
+  file.directory:
+    - user: ghost
+    - group: ghost
+    - mode: 775
+    - require:
+      - file: /srv/ghost/content/
+
 /srv/ghost/content/themes/monologue/:
   git.latest:
     - name: https://github.com/KazamatsuriOrg/monologue.git
