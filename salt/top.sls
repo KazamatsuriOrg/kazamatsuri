@@ -35,3 +35,7 @@ base:
   'roles:master':
     - match: grain
     - cloud
+
+  'swap':
+    - match: grain
+    - swap
