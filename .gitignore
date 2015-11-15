@@ -1,4 +1,4 @@
 .vagrant
 kazamatsuri.sublime-workspace
 pillar/keys.sls
-
+pillar/local.sls

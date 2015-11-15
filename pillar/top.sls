@@ -1,7 +1,7 @@
 base:
   '*':
-    - common
     - discourse
     - ghost
     - smtp
+    - local
     - keys
