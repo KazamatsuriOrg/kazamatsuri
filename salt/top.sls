@@ -15,6 +15,7 @@ base:
     - ghost.nginx
     - discourse.web
     - nfs.ghost_content
+    - nfs.discourse
 
   'roles:database':
     - match: grain

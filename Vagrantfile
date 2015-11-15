@@ -43,6 +43,7 @@ Vagrant.configure(2) do |config|
       salt.seed_master = {
         jena: salt.minion_pub,
         web1: "vagrant/web/web1.pub",
+        web2: "vagrant/web/web2.pub",
       }
       salt.run_highstate = true
       salt.colorize = true
@@ -66,10 +67,10 @@ Vagrant.configure(2) do |config|
     set_limits web, cpus: 1, memory: 1024
     web.vm.network "private_network", ip: "10.10.10.12"
     web.vm.provision "salt" do |salt|
-      salt.bootstrap_options = "-F -c /tmp -i web1"
+      salt.bootstrap_options = "-F -c /tmp -i web2"
       salt.minion_config = "vagrant/web/salt_minion.yml"
-      salt.minion_key = "vagrant/web/web1.pem"
-      salt.minion_pub = "vagrant/web/web1.pub"
+      salt.minion_key = "vagrant/web/web2.pem"
+      salt.minion_pub = "vagrant/web/web2.pub"
       salt.run_highstate = true
       salt.colorize = true
     end

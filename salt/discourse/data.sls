@@ -8,8 +8,9 @@ include:
     - require:
       - git: /srv/discourse/
 
-./launcher start data:
+discourse_data:
   cmd.run:
+    - name: ./launcher rebuild data
     - cwd: /srv/discourse
     - creates: /srv/discourse/shared/data
     - require:
