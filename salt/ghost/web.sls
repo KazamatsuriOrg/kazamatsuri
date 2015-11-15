@@ -14,8 +14,9 @@ ghost_source:
     - require:
       - user: ghost_user
   cmd.run:
-    - name: "mkdir -p ghost && cd ghost && unzip /srv/ghost-{{ pillar['ghost']['version'] }}.zip"
+    - name: 'bash -c "mkdir -p ghost; cd ghost; unzip /srv/ghost-{{ pillar['ghost']['version'] }}.zip"'
     - cwd: /srv
+    - creates: /srv/ghost/
   # archive.extracted:
   #   - name: /srv/ghost/
   #   - source: /srv/ghost-{{ pillar['ghost']['version'] }}.zip
