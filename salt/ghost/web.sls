@@ -93,6 +93,9 @@ ghost_source:
       - cmd: /srv/ghost/
       - git: /srv/ghost/content/themes/monologue/
       - file: /srv/ghost/config.js
+      - file: /srv/ghost/content/themes/
+      - file: /srv/ghost/content/data/
+      - file: /srv/ghost/content/apps/
 
 ghost:
   service.running:
