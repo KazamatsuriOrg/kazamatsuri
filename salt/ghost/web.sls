@@ -40,6 +40,13 @@ ghost_source:
       - archive: ghost_source
       - user: ghost_user
 
+/srv/ghost/content/themes/monologue/:
+  git.latest:
+    - name: https://github.com/KazamatsuriOrg/monologue.git
+    - target: /srv/ghost/content/themes/monologue
+    - require:
+      - archive: ghost_source
+
 /etc/systemd/system/ghost.service:
   file.managed:
     - source: salt://ghost/ghost.service
