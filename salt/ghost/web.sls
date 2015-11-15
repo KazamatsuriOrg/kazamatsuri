@@ -13,13 +13,18 @@ ghost_source:
     - user: ghost
     - require:
       - user: ghost_user
-  archive.extracted:
-    - name: /srv/ghost/
-    - source: /srv/ghost-{{ pillar['ghost']['version'] }}.zip
-    - archive_format: zip
+  cmd.run:
+    - name: unzip /srv/ghost-{{ pillar['ghost']['version'] }}.zip
+    - cwd: /srv/ghost
     - require:
-      - file: ghost_source
-      - user: ghost_user
+      - file: /srv/ghost/
+  # archive.extracted:
+  #   - name: /srv/ghost/
+  #   - source: /srv/ghost-{{ pillar['ghost']['version'] }}.zip
+  #   - archive_format: zip
+  #   - require:
+  #     - file: ghost_source
+  #     - user: ghost_user
 
 /srv/ghost/config.js:
   file.managed:
@@ -32,6 +37,8 @@ ghost_source:
       - user: ghost_user
 
 /srv/ghost/:
+  file.directory:
+    - makedirs
   npm.bootstrap:
     - user: ghost
     - require:
