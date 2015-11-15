@@ -58,7 +58,7 @@ ghost_source:
   file.managed:
     - source: salt://ghost/ghost.service
     - require:
-      - npm: /srv/ghost/
+      - cmd: /srv/ghost/
       - git: /srv/ghost/content/themes/monologue/
       - file: /srv/ghost/config.js
 
@@ -67,7 +67,7 @@ ghost:
     - enable: True
     - require:
       - file: /etc/systemd/system/ghost.service
-      - npm: /srv/ghost/
+      - cmd: /srv/ghost/
     - watch:
       - file: /etc/systemd/system/ghost.service
       - file: /srv/ghost/config.js
