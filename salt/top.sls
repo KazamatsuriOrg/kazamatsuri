@@ -3,6 +3,7 @@ base:
     - common
     - dotdeb
     - nfs.client
+    - swap
 
   'roles:web':
     - match: grain
@@ -35,7 +36,3 @@ base:
   'roles:master':
     - match: grain
     - cloud
-
-  'swap':
-    - match: grain
-    - swap
