@@ -50,6 +50,10 @@ ghost_source:
 /etc/systemd/system/ghost.service:
   file.managed:
     - source: salt://ghost/ghost.service
+    - require:
+      - npm: /srv/ghost/
+      - git: /srv/ghost/content/themes/monologue/
+      - file: /srv/ghost/config.js
 
 ghost:
   service.running:
