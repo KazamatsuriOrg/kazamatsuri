@@ -15,7 +15,7 @@
     - args: /srv/ghost/content/images /shared/ghost/content/images
     - stateful: True
     - require:
-      - archive: ghost_source
+      - cmd: ghost_source
       - file: /shared/ghost/content/images/
     - require_in:
       - service: /etc/systemd/system/ghost.service
