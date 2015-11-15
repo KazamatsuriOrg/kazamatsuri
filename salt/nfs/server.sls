@@ -8,6 +8,8 @@ nfs-server:
       - pkg: nfs-server
       - file: /srv/shared/
       - file: /etc/exports
+    - require_in:
+      - mount: /shared/
     - watch:
       - file: /etc/exports
 

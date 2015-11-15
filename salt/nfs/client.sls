@@ -7,3 +7,5 @@ nfs-client:
     - fstype: nfs4
     - device: "{{ pillar['db_host'] }}:/srv/shared"
     - mkmnt: True
+    - require:
+      - pkg: nfs-client
