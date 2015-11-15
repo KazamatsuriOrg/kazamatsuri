@@ -17,7 +17,6 @@ ghost_source:
     - name: /srv/ghost/
     - source: /srv/ghost-{{ pillar['ghost']['version'] }}.zip
     - archive_format: zip
-    - user: ghost
     - require:
       - file: ghost_source
       - user: ghost_user
