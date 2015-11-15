@@ -8,19 +8,9 @@ include:
     - require:
       - git: /srv/discourse/
 
-bootstrap_discourse_web:
-  cmd.script:
-    - source: salt://discourse/bootstrap.sh
-    - args: web
+./launcher start web:
+  cmd.run:
     - cwd: /srv/discourse
     - creates: /srv/discourse/shared/web
     - require:
       - file: /srv/discourse/containers/web.yml
-
-discourse@web:
-  service.running:
-    - enable: True
-    - require:
-      - file: /srv/discourse/containers/web.yml
-      - file: /etc/systemd/system/discourse@.service
-      - cmd: bootstrap_discourse_web

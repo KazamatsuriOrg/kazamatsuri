@@ -6,7 +6,3 @@
     - target: /srv/discourse
     - require:
       - file: /srv/discourse/
-
-/etc/systemd/system/discourse@.service:
-  file.managed:
-    - source: salt://discourse/discourse@.service
