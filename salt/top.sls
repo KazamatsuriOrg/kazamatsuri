@@ -2,6 +2,7 @@ base:
   '*':
     - common
     - dotdeb
+    - nfs.client
 
   'roles:web':
     - match: grain
@@ -24,3 +25,7 @@ base:
   'roles:balancer':
     - match: grain
     - haproxy
+
+  'roles:storage':
+    - match: grain
+    - nfs.server
