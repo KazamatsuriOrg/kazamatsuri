@@ -71,12 +71,20 @@ ghost_source:
     - require:
       - file: /srv/ghost/content/
 
+/srv/ghost/content/themes/:
+  file.directory:
+    - user: ghost
+    - group: ghost
+    - mode: 775
+    - require:
+      - file: /srv/ghost/content/
+
 /srv/ghost/content/themes/monologue/:
   git.latest:
     - name: https://github.com/KazamatsuriOrg/monologue.git
     - target: /srv/ghost/content/themes/monologue
     - require:
-      - cmd: ghost_source
+      - file: /srv/ghost/content/themes/
 
 /etc/systemd/system/ghost.service:
   file.managed:
