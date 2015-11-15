@@ -31,7 +31,7 @@ ghost_source:
     - group: ghost
     - template: jinja
     - require:
-      - archive: ghost_source
+      - cmd: ghost_source
       - user: ghost_user
 
 /srv/ghost/:
@@ -39,7 +39,7 @@ ghost_source:
     - user: ghost
     - require:
       - pkg: nodejs
-      - archive: ghost_source
+      - cmd: ghost_source
       - user: ghost_user
 
 /srv/ghost/content/themes/monologue/:
@@ -47,7 +47,7 @@ ghost_source:
     - name: https://github.com/KazamatsuriOrg/monologue.git
     - target: /srv/ghost/content/themes/monologue
     - require:
-      - archive: ghost_source
+      - cmd: ghost_source
 
 /etc/systemd/system/ghost.service:
   file.managed:
