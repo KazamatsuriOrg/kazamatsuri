@@ -36,12 +36,16 @@ ghost_source:
       - user: ghost_user
 
 /srv/ghost/:
-  npm.bootstrap:
-    - user: ghost
-    - require:
-      - pkg: nodejs
-      - cmd: ghost_source
-      - user: ghost_user
+  # npm.bootstrap:
+  #   - user: ghost
+  #   - require:
+  #     - pkg: nodejs
+  #     - cmd: ghost_source
+  #     - user: ghost_user
+  cmd.run:
+    - name: npm install --production
+    - cwd: /srv/ghost/
+    - creates: /srv/ghost/node_modules
 
 /srv/ghost/content/themes/monologue/:
   git.latest:
