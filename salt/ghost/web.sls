@@ -63,6 +63,14 @@ ghost_source:
     - require:
       - file: /srv/ghost/content/
 
+/srv/ghost/content/apps/:
+  file.directory:
+    - user: ghost
+    - group: ghost
+    - mode: 775
+    - require:
+      - file: /srv/ghost/content/
+
 /srv/ghost/content/themes/monologue/:
   git.latest:
     - name: https://github.com/KazamatsuriOrg/monologue.git
