@@ -15,3 +15,4 @@ discourse_web:
     - creates: /srv/discourse/shared/web
     - require:
       - file: /srv/discourse/containers/web.yml
+      - mount: /var/swap

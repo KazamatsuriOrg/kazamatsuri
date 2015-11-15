@@ -15,3 +15,4 @@ discourse_data:
     - creates: /srv/discourse/shared/data
     - require:
       - file: /srv/discourse/containers/data.yml
+      - mount: /var/swap
