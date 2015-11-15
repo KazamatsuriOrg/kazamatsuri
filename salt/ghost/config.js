@@ -12,7 +12,18 @@ config = {
     // Configure your URL and mail settings here
     production: {
         url: 'http://kazamatsuri.org',
-        mail: {},
+        mail: {
+            transport: 'SMTP',
+            host: '{{ pillar['smtp']['host'] }}',
+            port: {{ pillar['smtp']['port'] }},
+            options: {
+                service: 'Mandrill',
+                auth: {
+                    user: '{{ pillar['smtp']['username'] }}',
+                    pass: '{{ pillar['smtp']['password'] }}',
+                }
+            }
+        },
         database: {
             client: 'pg',
             connection: {
