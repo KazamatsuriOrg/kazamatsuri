@@ -31,3 +31,7 @@ base:
   'roles:storage':
     - match: grain
     - nfs.server
+
+  'roles:master':
+    - match: grain
+    - cloud
