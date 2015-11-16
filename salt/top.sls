@@ -17,6 +17,7 @@ base:
     - discourse.web
     - nfs.ghost_content
     - nfs.discourse
+    - nfs.web
 
   'roles:database':
     - match: grain
