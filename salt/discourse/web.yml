@@ -17,7 +17,7 @@ expose:
 params:
   ## Which Git revision should this container use? (default: tests-passed)
   #version: tests-passed
-  version: 922744c
+  version: 922744c8c1f91759a6669d15c6d945acdf529484
 
 env:
   LANG: en_US.UTF-8
