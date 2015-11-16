@@ -6,6 +6,8 @@
 /shared/ghost/content/images/:
   file.directory:
     - mode: 777
+    - recurse:
+      - mode
     - require:
       - file: /shared/ghost/content/
 
