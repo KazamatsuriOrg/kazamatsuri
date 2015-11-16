@@ -16,3 +16,10 @@ discourse_web:
     - require:
       - file: /srv/discourse/containers/web.yml
       - mount: /var/swap
+
+/srv/discourse/update_web.sh:
+  file.managed:
+    - source: salt://discourse/update_web.sh
+    - mode: 755
+    - require:
+      - git: /srv/discourse/
