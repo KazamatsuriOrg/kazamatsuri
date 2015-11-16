@@ -50,6 +50,12 @@ env:
   ## The CDN address for this Discourse instance (configured to pull)
   #DISCOURSE_CDN_URL: //discourse-cdn.example.com
 
+  # New Relic license key
+  {% if pillar['newrelic']['license_key'] %}
+  NEW_RELIC_LICENSE_KEY: {{ pillar['newrelic']['license_key'] }}
+  NEW_RELIC_APP_NAME: Kazamatsuri Forum
+  {% endif %}
+
 volumes:
   - volume:
       host: /srv/discourse/shared/web
