@@ -4,6 +4,7 @@ base:
     - dotdeb
     - nfs.client
     - swap
+    - newrelic
 
   'roles:web':
     - match: grain
