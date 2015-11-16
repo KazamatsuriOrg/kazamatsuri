@@ -16,10 +16,11 @@
       - file: /shared/discourse/shared/web/
 
 /srv/discourse/shared/web/uploads/:
-  cmd.script:
-    - source: salt://nfs/make_shared.sh
-    - args: /srv/discourse/shared/web/uploads /shared/discourse/shared/web/uploads
-    - stateful: True
+  mount.mounted:
+    - fstype: none
+    - opts: bind
+    - mkmnt: True
+    - device: /shared/discourse/shared/web/uploads
     - require:
       - cmd: discourse_web
       - file: /shared/discourse/shared/web/uploads/
@@ -27,10 +28,11 @@
       - service: /etc/systemd/system/ghost.service
 
 /srv/discourse/shared/web/backups/:
-  cmd.script:
-    - source: salt://nfs/make_shared.sh
-    - args: /srv/discourse/shared/web/backups /shared/discourse/shared/web/backups
-    - stateful: True
+  mount.mounted:
+    - fstype: none
+    - opts: bind
+    - mkmnt: True
+    - device: /shared/discourse/shared/web/backups
     - require:
       - cmd: discourse_web
       - file: /shared/discourse/shared/web/backups/

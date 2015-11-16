@@ -11,7 +11,6 @@ base:
     - node
     - postgresql.client
     - nginx
-    - web_directories
     - ghost.web
     - ghost.nginx
     - discourse.web

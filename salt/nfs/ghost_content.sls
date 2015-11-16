@@ -12,10 +12,11 @@
       - file: /shared/ghost/content/
 
 /srv/ghost/content/images/:
-  cmd.script:
-    - source: salt://nfs/make_shared.sh
-    - args: /srv/ghost/content/images /shared/ghost/content/images
-    - stateful: True
+  mount.mounted:
+    - fstype: none
+    - opts: bind
+    - mkmnt: True
+    - device: /shared/ghost/content/images
     - require:
       - cmd: ghost_source
       - file: /shared/ghost/content/images/
