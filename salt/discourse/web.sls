@@ -16,6 +16,3 @@ discourse_web:
     - require:
       - file: /srv/discourse/containers/web.yml
       - mount: /var/swap
-
-/srv/discourse/update_web.sh:
-  file.absent
