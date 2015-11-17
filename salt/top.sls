@@ -36,3 +36,7 @@ base:
   'roles:master':
     - match: grain
     - cloud
+
+  'roles:mail':
+    - match: grain
+    - postfix
