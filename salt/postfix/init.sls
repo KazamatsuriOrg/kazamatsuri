@@ -42,6 +42,9 @@ postfix:
   file.managed:
     - source: salt://postfix/sasl_passwd
     - template: jinja
+    - user: root
+    - group: root
+    - mode: 600
     - require:
       - pkg: postfix
 
