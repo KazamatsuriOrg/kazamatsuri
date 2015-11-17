@@ -17,14 +17,14 @@ expose:
 params:
   ## Which Git revision should this container use? (default: tests-passed)
   #version: tests-passed
-  version: 922744c8c1f91759a6669d15c6d945acdf529484
+  version: {{ pillar['discourse']['version'] }}
 
 env:
   LANG: en_US.UTF-8
   ## TODO: How many concurrent web requests are supported?
   ## With 2GB we recommend 3-4 workers, with 1GB only 2
   ## If you have lots of memory, use one or two workers per logical CPU core
-  UNICORN_WORKERS: 2
+  UNICORN_WORKERS: {{ pillar['discourse']['workers_per_node'] }}
 
   ## TODO: configure connectivity to the databases
   DISCOURSE_DB_SOCKET: ''
