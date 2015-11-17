@@ -14,11 +14,12 @@
 /srv/ghost/content/images/:
   mount.mounted:
     - fstype: none
-    - opts: bind
+    - opts: bind,uid=ghost,gid=ghost
     - mkmnt: True
     - device: /shared/ghost/content/images
     - require:
       - cmd: ghost_source
+      - user: ghost_user
       - file: /shared/ghost/content/images/
     - require_in:
       - service: /etc/systemd/system/ghost.service
