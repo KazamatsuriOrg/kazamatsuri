@@ -1,5 +1,13 @@
 postfix:
   pkg.installed: []
+  service.running:
+    - enable: True
+    - require:
+      - pkg: postfix
+    - watch:
+      - file: /etc/postfix/main.cf
+      - cmd: /etc/aliases.db
+      - cmd: /etc/postfix/sasl_passwd.db
 
 /etc/postfix/main.cf:
   file.managed:
