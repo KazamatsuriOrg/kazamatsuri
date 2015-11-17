@@ -9,6 +9,12 @@ postfix:
       - cmd: /etc/aliases.db
       - cmd: /etc/postfix/sasl_passwd.db
 
+/etc/mailname:
+  file.managed:
+    - contents: kazamatsuri.org
+    - require:
+      - pkg: postfix
+
 /etc/postfix/main.cf:
   file.managed:
     - source: salt://postfix/main.cf
