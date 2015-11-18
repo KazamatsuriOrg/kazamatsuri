@@ -47,3 +47,4 @@ base:
   'roles:voice':
     - match: grain
     - murmur
+    - firewall.murmur
