@@ -6,3 +6,4 @@ base:
     - cloud
     - local
     - keys
+    - mine
