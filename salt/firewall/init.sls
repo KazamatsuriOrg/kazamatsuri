@@ -39,6 +39,7 @@ allow-established:
 default-drop:
   iptables.set_policy:
     - order: 1
+    - table: filter
     - chain: INPUT
     - policy: DROP
     - save: True
