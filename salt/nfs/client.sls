@@ -5,7 +5,7 @@ nfs-client:
 /shared/:
   mount.mounted:
     - fstype: nfs4
-    - device: "{{ pillar['db_host'] }}:/srv/shared"
+    - device: "{{ salt['mine.get']('roles:storage', 'private_ip_addrs', expr_form='grain').values()[0][0] }}:/srv/shared"
     - mkmnt: True
     - require:
       - pkg: nfs-client
