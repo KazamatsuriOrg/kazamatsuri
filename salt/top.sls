@@ -40,3 +40,7 @@ base:
   'roles:mail':
     - match: grain
     - postfix
+
+  'roles:voice':
+    - match: grain
+    - murmur

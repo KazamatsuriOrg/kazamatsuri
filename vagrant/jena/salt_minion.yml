@@ -6,4 +6,5 @@ grains:
     - balancer
     - storage
     - mail
+    - voice
     - master
