@@ -19,6 +19,12 @@ newrelic:
       - pkg: newrelic
       - file: /etc/newrelic/nrsysmond.cfg
 
+newrelic_docker:
+  group.present:
+    - name: docker
+    - addusers:
+      - newrelic
+
 /etc/newrelic/nrsysmond.cfg:
   file.managed:
     - source: salt://newrelic/nrsysmond.cfg
