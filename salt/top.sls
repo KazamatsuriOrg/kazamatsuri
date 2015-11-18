@@ -29,6 +29,7 @@ base:
   'roles:balancer':
     - match: grain
     - haproxy
+    - firewall.http
 
   'roles:storage':
     - match: grain
