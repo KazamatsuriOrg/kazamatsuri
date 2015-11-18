@@ -5,6 +5,7 @@ base:
     - nfs.client
     - swap
     - newrelic
+    - firewall
 
   'roles:web':
     - match: grain
