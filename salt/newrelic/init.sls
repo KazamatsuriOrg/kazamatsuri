@@ -10,6 +10,8 @@ newrelic:
   service.running:
     - name: newrelic-sysmond
     - enable: True
+    - watch:
+      - group: newrelic_docker
   {% else %}
   service.dead:
     - name: newrelic-sysmond
