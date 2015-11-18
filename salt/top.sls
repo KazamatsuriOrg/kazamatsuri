@@ -42,6 +42,7 @@ base:
   'roles:mail':
     - match: grain
     - postfix
+    - firewall.smtp
 
   'roles:voice':
     - match: grain
