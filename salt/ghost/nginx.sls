@@ -1,6 +1,6 @@
 /etc/nginx/sites-available/ghost:
   file.managed:
-    - source: salt://ghost/nginx
+    - source: salt://ghost/nginx.conf
     - require:
       - pkg: nginx
       - file: /etc/nginx/sites-enabled/ghost
