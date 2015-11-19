@@ -1,3 +1,3 @@
 discourse:
-  version: aeccc030d64558b84123ea8a8fe81abf680e8841
+  version: 85580cd243d41fb32adbc5901c7cc25b5de78c3f
   workers_per_node: 2
