@@ -9,6 +9,7 @@ essentials:
       - strace
       - ltrace
       - zsh
+      - curl
 
 unzip:
   pkg.installed
