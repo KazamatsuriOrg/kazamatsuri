@@ -48,33 +48,46 @@ ghost_source:
     - creates: /srv/ghost/node_modules
 
 /srv/ghost/content/:
+  {% if grains.get('vagrant', False) %}
+  file.symlink:
+    - name: /srv/ghost/content
+    - target: /vagrant/vagrant/srv/ghost/content
+    - force: True
+  {% else %}
   file.directory:
     - user: ghost
     - group: ghost
+  {% endif %}
     - mode: 775
     - require:
       - cmd: ghost_source
 
 /srv/ghost/content/data/:
   file.directory:
+    {% if not grains.get('vagrant', False) %}
     - user: ghost
     - group: ghost
+    {% endif %}
     - mode: 775
     - require:
       - file: /srv/ghost/content/
 
 /srv/ghost/content/apps/:
   file.directory:
+    {% if not grains.get('vagrant', False) %}
     - user: ghost
     - group: ghost
+    {% endif %}
     - mode: 775
     - require:
       - file: /srv/ghost/content/
 
 /srv/ghost/content/themes/:
   file.directory:
+    {% if not grains.get('vagrant', False) %}
     - user: ghost
     - group: ghost
+    {% endif %}
     - mode: 775
     - require:
       - file: /srv/ghost/content/
