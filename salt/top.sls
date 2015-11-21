@@ -6,6 +6,7 @@ base:
     - swap
     - newrelic
     - firewall
+    - logging
 
   'roles:web':
     - match: grain
