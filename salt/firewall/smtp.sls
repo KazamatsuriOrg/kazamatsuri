@@ -4,7 +4,7 @@ allow-smtp:
     - chain: INPUT
     - proto: tcp
     - dports:
-      - 80
+      - 25
       - 587
     - jump: ACCEPT
     - save: True
