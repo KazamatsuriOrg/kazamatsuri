@@ -15,6 +15,10 @@
   file.symlink:
     - target: /shared/ghost/content/images
     - force: True
+    {% if grains.get('vagrant', False) %}
+    - user: vagrant
+    - group: vagrant
+    {% endif %}
     - require:
       - cmd: ghost_source
       - user: ghost_user
