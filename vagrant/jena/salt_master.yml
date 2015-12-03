@@ -1,3 +1,4 @@
+auto_accept: True
 file_roots:
   base:
     - /vagrant/salt

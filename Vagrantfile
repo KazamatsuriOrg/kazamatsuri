@@ -40,11 +40,7 @@ Vagrant.configure(2) do |config|
       salt.minion_key = "vagrant/jena/jena.pem"
       salt.minion_pub = "vagrant/jena/jena.pub"
       salt.master_config = "vagrant/jena/salt_master.yml"
-      salt.seed_master = {
-        jena: salt.minion_pub,
-        web1: "vagrant/web/web1.pub",
-        web2: "vagrant/web/web2.pub",
-      }
+      salt.seed_master = { jena: salt.minion_pub }
       salt.run_highstate = true
       salt.colorize = true
     end
