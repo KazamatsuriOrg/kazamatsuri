@@ -4,6 +4,7 @@ base:
     - ghost
     - smtp
     - cloud
+    - openvpn
     - local
     - keys
     - mine

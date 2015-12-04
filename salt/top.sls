@@ -39,6 +39,8 @@ base:
   'roles:master':
     - match: grain
     - cloud
+    - openvpn
+    - firewall.openvpn
 
   'roles:mail':
     - match: grain
