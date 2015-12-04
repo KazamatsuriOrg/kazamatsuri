@@ -40,6 +40,7 @@ patch-pkitool:
 /etc/openvpn/keys/:
   cmd.run:
     - name: 'source /root/easy-rsa-vars.sh && /usr/share/easy-rsa/clean-all'
+    - shell: /bin/bash
     - creates: /etc/openvpn/keys
     - require:
       - pkg: easy-rsa
@@ -49,6 +50,7 @@ patch-pkitool:
 /etc/openvpn/keys/dh2048.pem:
   cmd.run:
     - name: 'source /root/easy-rsa-vars.sh && /usr/share/easy-rsa/build-dh'
+    - shell: /bin/bash
     - creates: /etc/openvpn/keys/dh2048.pem
     - require:
       - cmd: /etc/openvpn/keys/
@@ -56,6 +58,7 @@ patch-pkitool:
 /etc/openvpn/keys/ca.crt:
   cmd.run:
     - name: 'source /root/easy-rsa-vars.sh && /usr/share/easy-rsa/pkitool --initca'
+    - shell: /bin/bash
     - creates: /etc/openvpn/keys/ca.crt
     - require:
       - cmd: /etc/openvpn/keys/
@@ -63,6 +66,7 @@ patch-pkitool:
 /etc/openvpn/keys/server.crt:
   cmd.run:
     - name: 'source /root/easy-rsa-vars.sh && /usr/share/easy-rsa/pkitool --server server'
+    - shell: /bin/bash
     - creates: /etc/openvpn/keys/server.crt
     - env:
       - KEY_CN: Jena
