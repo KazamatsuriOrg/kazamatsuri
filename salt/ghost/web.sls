@@ -9,14 +9,15 @@ ghost_source:
   file.managed:
     - name: /srv/ghost-{{ pillar['ghost']['version'] }}.zip
     - source: https://ghost.org/zip/ghost-{{ pillar['ghost']['version'] }}.zip
-    - source_hash: sha1=1a62318a9bbac3a69f34dfb24f2a8e4c577db02a
+    - source_hash: sha1={{ pillar['ghost']['zip_sha1']}}
     - user: ghost
     - require:
       - user: ghost_user
-  cmd.run:
-    - name: 'bash -c "mkdir -p ghost; cd ghost; unzip /srv/ghost-{{ pillar['ghost']['version'] }}.zip"'
+  cmd.watch:
+    - name: 'bash -c "mkdir -p ghost; cd ghost; rm -rf core node_modules; unzip -o /srv/ghost-{{ pillar['ghost']['version'] }}.zip"'
     - cwd: /srv
-    - creates: /srv/ghost/
+    - watch:
+      - file: ghost_source
   # archive.extracted:
   #   - name: /srv/ghost/
   #   - source: /srv/ghost-{{ pillar['ghost']['version'] }}.zip
@@ -42,10 +43,11 @@ ghost_source:
   #     - pkg: nodejs
   #     - cmd: ghost_source
   #     - user: ghost_user
-  cmd.run:
+  cmd.watch:
     - name: npm install --production
     - cwd: /srv/ghost/
-    - creates: /srv/ghost/node_modules
+    - watch:
+      - cmd: ghost_source
 
 /srv/ghost/content/:
   {% if grains.get('vagrant', False) %}
@@ -119,3 +121,4 @@ ghost:
     - watch:
       - file: /etc/systemd/system/ghost.service
       - file: /srv/ghost/config.js
+      - cmd: /srv/ghost/
