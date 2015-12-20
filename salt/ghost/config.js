@@ -11,7 +11,7 @@ config = {
   // When running Ghost in the wild, use the production environment.
   // Configure your URL and mail settings here
   production: {
-    url: 'http://kazamatsuri.org',
+    url: 'http://kazamatsuri.{{ 'local' if grains.get('vagrant', False) else 'org' }}',
     mail: {
       transport: 'SMTP',
       host: '{{ pillar['smtp']['host'] }}',
