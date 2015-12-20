@@ -6,6 +6,7 @@ templates:
   - "templates/postgres.template.yml"
   - "templates/redis.template.yml"
   - "templates/sshd.template.yml"
+  - "templates/syslog.papertrail.template.yml"
 
 expose:
   - "5433:5432"

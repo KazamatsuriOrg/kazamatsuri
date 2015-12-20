@@ -1,0 +1,5 @@
+run:
+  - file:
+      path: /etc/rsyslog.d/99-papertrail.conf
+      chmod: "+x"
+      contents: "{% if pillar['syslog']['host'] %}*.*          @{{ pillar['syslog']['host'] }}{% endif %}"

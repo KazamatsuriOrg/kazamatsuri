@@ -6,6 +6,7 @@ templates:
   - "templates/web.template.yml"
   # - "templates/web.ratelimited.template.yml"
   # - "templates/web.socketed.template.yml"
+  - "templates/syslog.papertrail.template.yml"
 
 expose:
   - "10080:80"
