@@ -22,7 +22,7 @@ Vagrant.configure(2) do |config|
   # Use a Debian 8.2 base box for all machines
   config.vm.box = "box-cutter/debian82"
   
-  config.vm.define "jena" do |jena|
+  config.vm.define "jena", primary: true do |jena|
     # Set resource limits
     set_limits jena, cpus: 1, memory: 1024
     
