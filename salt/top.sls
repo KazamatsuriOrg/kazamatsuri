@@ -51,3 +51,9 @@ base:
     - match: grain
     - murmur
     - firewall.murmur
+
+  'roles:minecraft':
+    - match: grain
+    - java
+    - minecraft
+    # - firewall.minecraft

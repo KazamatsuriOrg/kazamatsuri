@@ -71,4 +71,15 @@ Vagrant.configure(2) do |config|
       salt.colorize = true
     end
   end
+  
+  config.vm.define "minecraft", autostart: false do |mcraft|
+    set_limits mcraft, cpus: 1, memory: 1024
+    mcraft.vm.network "private_network", ip: "10.10.10.101"
+    mcraft.vm.provision "salt" do |salt|
+      salt.bootstrap_options = "-F -c /tmp -i minecraft"
+      salt.minion_config = "vagrant/minecraft/salt_minion.yml"
+      salt.run_highstate = true
+      salt.colorize = true
+    end
+  end
 end

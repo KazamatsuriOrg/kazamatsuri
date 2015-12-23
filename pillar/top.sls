@@ -5,6 +5,7 @@ base:
     - smtp
     - cloud
     - openvpn
+    - minecraft
     - local
     - keys
     - mine

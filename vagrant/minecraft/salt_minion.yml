@@ -1,0 +1,5 @@
+master: 10.10.10.10
+grains:
+  vagrant: true
+  roles:
+    - minecraft
