@@ -56,4 +56,4 @@ base:
     - match: grain
     - java
     - minecraft
-    # - firewall.minecraft
+    - firewall.minecraft
