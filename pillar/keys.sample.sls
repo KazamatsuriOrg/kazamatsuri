@@ -22,3 +22,6 @@ newrelic:
 
 syslog:
   host:
+
+minecraft:
+  user_password: minecraft
