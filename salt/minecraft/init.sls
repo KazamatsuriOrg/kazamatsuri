@@ -40,16 +40,3 @@ build_spigot:
   file.managed:
     - source: salt://minecraft/minecraft.service
     - template: jinja
-
-{% for filename in pillar['minecraft']['files'] %}
-/srv/minecraft/{{ filename }}:
-  file.managed:
-    - source: salt://minecraft/files/{{ filename }}
-    - user: minecraft
-    - group: minecraft
-    - mode: 644
-    - require:
-      - file: /srv/minecraft/
-    - require_in:
-      - service: minecraft
-{% endfor %}
