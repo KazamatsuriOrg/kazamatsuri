@@ -8,6 +8,9 @@ minecraft:
     - require:
       - file: /etc/systemd/system/minecraft.service
       - cmd: build_spigot
+    - watch:
+      - file: /etc/systemd/system/minecraft.service
+      - cmd: build_spigot
 
 /srv/minecraft/:
   file.directory:
