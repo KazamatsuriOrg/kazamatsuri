@@ -6,7 +6,7 @@ After=network.target
 User=minecraft
 Group=minecraft
 WorkingDirectory=/srv/minecraft
-ExecStart=/usr/bin/java -Xms{{ pillar['minecraft']['memory'] }} -Xmx{{ pillar['minecraft']['memory'] }} -Dcom.mojang.eula.agree=true -jar spigot-{{ pillar['minecraft']['version'] }}.jar
+ExecStart=/usr/bin/java -Xms{{ pillar['minecraft']['memory'] }} -Xmx{{ pillar['minecraft']['memory'] }} -XX:MaxPermSize=128M -Dcom.mojang.eula.agree=true -jar spigot-{{ pillar['minecraft']['version'] }}.jar --noconsole nogui
 Restart=always
 
 [Install]
