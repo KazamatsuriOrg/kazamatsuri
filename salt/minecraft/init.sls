@@ -37,7 +37,7 @@ build_spigot:
     - creates: /srv/minecraft/spigot-{{ pillar['minecraft']['version'] }}.jar
     - require:
       - user: minecraft
-      - file: /srv/minecraft/
+      - file: /srv/minecraft/BuildTools.jar
       - pkg: java
 
 /etc/systemd/system/minecraft.service:
