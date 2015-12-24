@@ -3,7 +3,7 @@ minecraft:
     - gid_from_name: True
     - system: True
     - home: /var/lib/minecraft
-    - password: {{ pillar['minecraft']['user_password'] }}
+    - shell: /bin/bash
   service.running:
     - enable: True
     - require:
