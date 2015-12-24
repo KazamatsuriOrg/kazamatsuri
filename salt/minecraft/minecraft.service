@@ -9,5 +9,11 @@ WorkingDirectory=/srv/minecraft
 ExecStart=/usr/bin/java -Xms{{ pillar['minecraft']['memory'] }} -Xmx{{ pillar['minecraft']['memory'] }} -XX:MaxPermSize=128M -Dcom.mojang.eula.agree=true -jar spigot-{{ pillar['minecraft']['version'] }}.jar --noconsole nogui
 Restart=always
 
+NoNewPrivileges=true
+PrivateTmp=true
+PrivateDevices=true
+ProtectSystem=full
+ProtectHome=true
+
 [Install]
 WantedBy=multi-user.target
