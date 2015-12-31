@@ -22,3 +22,10 @@ newrelic:
 
 syslog:
   host:
+
+s3:
+  access_key_id:
+  access_key:
+  bucket:
+  region:
+  cdn:
