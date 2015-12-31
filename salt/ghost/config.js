@@ -64,10 +64,20 @@ config = {
 
       // #### Database
       // Ghost supports sqlite3 (default), MySQL & PostgreSQL
+      // database: {
+      //   client: 'sqlite3',
+      //   connection: {
+      //     filename: path.join(__dirname, '/content/data/ghost-dev.db')
+      //   },
+      //   debug: false
+      // },
       database: {
-        client: 'sqlite3',
+        client: 'pg',
         connection: {
-          filename: path.join(__dirname, '/content/data/ghost-dev.db')
+          host: '{{ salt['mine.get']('roles:database', 'private_ip_addrs', expr_form='grain').values()[0][0] }}',
+          user: 'ghost',
+          password: '{{ pillar['ghost']['db_password'] }}',
+          database: 'ghost',
         },
         debug: false
       },
