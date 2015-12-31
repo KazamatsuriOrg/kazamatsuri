@@ -34,7 +34,18 @@ config = {
       },
       debug: false
     },
-
+    {% if pillar.get('s3', {}).get('bucket', None) %}
+    storage: {
+      active: 'ghost-s3',
+      'ghost-s3': {
+        accessKeyId: '{{ pillar['s3']['access_key_id'] }}',
+        secretAccessKey: '{{ pillar['s3']['access_key'] }}',
+        bucket: '{{ pillar['s3']['bucket'] }}',
+        region: '{{ pillar['s3']['region'] }}',
+        assetHost: '{{ pillar['s3']['cdn'] }}/'
+      }
+    },
+    {% endif %}
     server: {
       host: '127.0.0.1',
       port: '2368'
@@ -81,6 +92,18 @@ config = {
         },
         debug: false
       },
+      {% if pillar.get('s3', {}).get('bucket', None) %}
+      storage: {
+        active: 'ghost-s3',
+        'ghost-s3': {
+          accessKeyId: '{{ pillar['s3']['access_key_id'] }}',
+          secretAccessKey: '{{ pillar['s3']['access_key'] }}',
+          bucket: '{{ pillar['s3']['bucket'] }}',
+          region: '{{ pillar['s3']['region'] }}',
+          assetHost: '{{ pillar['s3']['cdn'] }}/'
+        }
+      },
+      {% endif %}
       // #### Server
       // Can be host & port (default), or socket
       server: {

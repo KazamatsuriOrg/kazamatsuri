@@ -91,6 +91,19 @@ ghost_source:
     - require:
       - file: /srv/ghost/content/themes/
 
+/srv/ghost/content/storage/ghost-s3/index.js:
+  file.managed:
+    - contents: |
+        'use strict';
+        module.exports = require('ghost-s3-storage');
+    - makedirs: True
+
+ghost-s3-storage:
+  npm.installed:
+    - dir: /srv/ghost
+    - require:
+      - cmd: ghost_source
+
 /etc/systemd/system/ghost.service:
   file.managed:
     - source: salt://ghost/ghost.service
