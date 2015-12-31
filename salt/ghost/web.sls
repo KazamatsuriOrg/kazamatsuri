@@ -50,49 +50,39 @@ ghost_source:
       - cmd: ghost_source
 
 /srv/ghost/content/:
-  {% if grains.get('vagrant', False) %}
-  file.symlink:
-    - name: /srv/ghost/content
-    - target: /vagrant/vagrant/srv/ghost/content
-    - force: True
-  {% else %}
   file.directory:
     - user: ghost
     - group: ghost
-  {% endif %}
     - mode: 775
     - require:
       - cmd: ghost_source
 
-/srv/ghost/content/data/:
+{% for dir in ['data', 'apps', 'themes'] %}
+/srv/ghost/content/{{ dir }}/:
+  {% if not grains.get('vagrant', False) %}
   file.directory:
-    {% if not grains.get('vagrant', False) %}
     - user: ghost
     - group: ghost
-    {% endif %}
     - mode: 775
+  {% else %}
+  file.symlink:
+    - name: /srv/ghost/content/{{ dir }}
+    - target: /vagrant/vagrant/srv/ghost/content/{{ dir }}
+    - force: True
+    - require:
+      - file: /vagrant/vagrant/srv/ghost/content/{{ dir }}/
+  {% endif %}
     - require:
       - file: /srv/ghost/content/
 
-/srv/ghost/content/apps/:
+{% if grains.get('vagrant', False) %}
+/vagrant/vagrant/srv/ghost/content/{{ dir }}/:
   file.directory:
-    {% if not grains.get('vagrant', False) %}
-    - user: ghost
-    - group: ghost
-    {% endif %}
-    - mode: 775
-    - require:
-      - file: /srv/ghost/content/
+    - user: vagrant
+    - group: vagrant
+{% endif %}
 
-/srv/ghost/content/themes/:
-  file.directory:
-    {% if not grains.get('vagrant', False) %}
-    - user: ghost
-    - group: ghost
-    {% endif %}
-    - mode: 775
-    - require:
-      - file: /srv/ghost/content/
+{% endfor %}
 
 /srv/ghost/content/themes/monologue/:
   git.latest:
