@@ -18,13 +18,6 @@ ghost_source:
     - cwd: /srv
     - watch:
       - file: ghost_source
-  # archive.extracted:
-  #   - name: /srv/ghost/
-  #   - source: /srv/ghost-{{ pillar['ghost']['version'] }}.zip
-  #   - archive_format: zip
-  #   - require:
-  #     - file: ghost_source
-  #     - user: ghost_user
 
 /srv/ghost/config.js:
   file.managed:
@@ -37,12 +30,6 @@ ghost_source:
       - user: ghost_user
 
 /srv/ghost:
-  # npm.bootstrap:
-  #   - user: ghost
-  #   - require:
-  #     - pkg: nodejs
-  #     - cmd: ghost_source
-  #     - user: ghost_user
   cmd.watch:
     - name: npm install --production
     - cwd: /srv/ghost
