@@ -1,5 +1,6 @@
 base:
   '*':
+    - sites
     - discourse
     - ghost
     - smtp

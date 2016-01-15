@@ -3,30 +3,61 @@ ghost:
     - gid_from_name: True
     - system: True
     - home: /var/lib/ghost
+  service.dead:
+    - enable: False
+
+/etc/systemd/system/ghost.service:
+  file.absent:
+    - require:
+      - service: ghost
+
+/srv/ghost:
+  file.absent: []
+
+/etc/systemd/system/ghost@.service:
+  file.managed:
+    - source: salt://ghost/ghost@.service
+
+
+
+/srv/kazamatsuri/ghost/content/themes/monologue:
+  git.latest:
+    - name: https://github.com/KazamatsuriOrg/monologue.git
+    - target: /srv/kazamatsuri/ghost/content/themes/monologue
+    - require:
+      - file: /srv/kazamatsuri/ghost/content
+
+
+
+{% for site in pillar['sites'] %}
+
+ghost@{{ site['id'] }}:
   service.running:
     - enable: True
     - require:
-      - file: /etc/systemd/system/ghost.service
-      - git: /srv/ghost
-      - npm: /srv/ghost
-      - cmd: /srv/ghost
-      - git: /srv/ghost/content/themes/monologue
-      - file: /srv/ghost/content/storage/ghost-s3/index.js
+      - file: /etc/systemd/system/ghost@.service
+      - git: /srv/{{ site['id'] }}/ghost
+      - npm: /srv/{{ site['id'] }}/ghost
+      - cmd: /srv/{{ site['id'] }}/ghost
+      - git: /srv/{{ site['id'] }}/ghost/content/themes/monologue
+      - file: /srv/{{ site['id'] }}/ghost/content/storage/ghost-s3/index.js
     - watch:
-      - file: /etc/systemd/system/ghost.service
-      - git: /srv/ghost
-      - npm: /srv/ghost
-      - cmd: /srv/ghost
-      - git: /srv/ghost/content/themes/monologue
-      - file: /srv/ghost/config.js
+      - file: /etc/systemd/system/ghost@.service
+      - git: /srv/{{ site['id'] }}/ghost
+      - npm: /srv/{{ site['id'] }}/ghost
+      - cmd: /srv/{{ site['id'] }}/ghost
+      - git: /srv/{{ site['id'] }}/ghost/content/themes/monologue
+      - file: /srv/{{ site['id'] }}/ghost/config.js
 
-/srv/ghost:
+/srv/{{ site['id'] }}/ghost:
   git.latest:
     - name: https://github.com/TryGhost/Ghost.git
-    - target: /srv/ghost
+    - target: /srv/{{ site['id'] }}/ghost
     - branch: stable
     - rev: {{ pillar['ghost']['version'] }}
     - force_clone: True
+    - require:
+      - file: /srv/{{ site['id'] }}
   cmd.wait:
     - name: |
         git clean -ffdx core
@@ -34,63 +65,52 @@ ghost:
         npm install --no-optional
         grunt init
         grunt prod
-    - cwd: /srv/ghost
+    - cwd: /srv/{{ site['id'] }}/ghost
     - require:
       - npm: grunt-cli
     - watch:
-      - git: /srv/ghost
+      - git: /srv/{{ site['id'] }}/ghost
   npm.installed:
     - pkgs:
       - ghost-s3-storage
       - pg
-    - dir: /srv/ghost
+    - dir: /srv/{{ site['id'] }}/ghost
     - require:
-      - git: /srv/ghost
-      - cmd: /srv/ghost
+      - git: /srv/{{ site['id'] }}/ghost
+      - cmd: /srv/{{ site['id'] }}/ghost
 
-/srv/ghost/config.js:
+/srv/{{ site['id'] }}/ghost/config.js:
   file.managed:
     - source: salt://ghost/config.js
     - template: jinja
     - require:
-      - git: /srv/ghost
+      - git: /srv/{{ site['id'] }}/ghost
 
-
-
-/srv/ghost/content:
+/srv/{{ site['id'] }}/ghost/content:
   file.directory:
     - force: True
     - require:
-      - git: /srv/ghost
+      - git: /srv/{{ site['id'] }}/ghost
 
-/srv/ghost/content/storage/ghost-s3/index.js:
+/srv/{{ site['id'] }}/ghost/content/storage/ghost-s3/index.js:
   file.managed:
     - contents: |
         'use strict';
         module.exports = require('ghost-s3-storage');
     - makedirs: True
     - require:
-      - file: /srv/ghost/content
-
-/srv/ghost/content/themes/monologue:
-  git.latest:
-    - name: https://github.com/KazamatsuriOrg/monologue.git
-    - target: /srv/ghost/content/themes/monologue
-    - require:
-      - file: /srv/ghost/content
-
-/etc/systemd/system/ghost.service:
-  file.managed:
-    - source: salt://ghost/ghost.service
+      - file: /srv/{{ site['id'] }}/ghost/content
 
 
 
 {% for dir in ['apps', 'data', 'images', 'themes'] %}
-/srv/ghost/content/{{ dir }}:
+/srv/{{ site['id'] }}/ghost/content/{{ dir }}:
   file.directory:
     - user: ghost
     - require:
-      - file: /srv/ghost/content
+      - file: /srv/{{ site['id'] }}/ghost/content
     - require_in:
-      - service: ghost
+      - service: ghost@{{ site['id'] }}
+{% endfor %}
+
 {% endfor %}

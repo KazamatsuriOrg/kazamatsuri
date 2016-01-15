@@ -7,8 +7,8 @@ After=network.target
 User=ghost
 Group=ghost
 Environment=NODE_ENV=production
-WorkingDirectory=/srv/ghost
-ExecStart=/usr/bin/node index.js
+WorkingDirectory=/srv/%i/ghost
+ExecStart=/usr/bin/node /srv/%i/ghost/index.js
 TimeoutSec=10
 Restart=always
 RestartSec=1

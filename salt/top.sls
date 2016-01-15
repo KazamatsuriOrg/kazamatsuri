@@ -10,6 +10,7 @@ base:
 
   'roles:web':
     - match: grain
+    - sites
     - docker
     - node
     - node.grunt-cli
