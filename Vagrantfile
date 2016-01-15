@@ -52,8 +52,6 @@ Vagrant.configure(2) do |config|
     web.vm.provision "salt" do |salt|
       salt.bootstrap_options = "-F -c /tmp -i web1"
       salt.minion_config = "vagrant/web/salt_minion.yml"
-      salt.minion_key = "vagrant/web/web1.pem"
-      salt.minion_pub = "vagrant/web/web1.pub"
       salt.run_highstate = true
       salt.colorize = true
     end
@@ -65,8 +63,6 @@ Vagrant.configure(2) do |config|
     web.vm.provision "salt" do |salt|
       salt.bootstrap_options = "-F -c /tmp -i web2"
       salt.minion_config = "vagrant/web/salt_minion.yml"
-      salt.minion_key = "vagrant/web/web2.pem"
-      salt.minion_pub = "vagrant/web/web2.pub"
       salt.run_highstate = true
       salt.colorize = true
     end
