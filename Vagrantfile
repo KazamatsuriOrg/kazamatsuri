@@ -14,6 +14,8 @@ def set_limits(box, cpus: cpus, memory: memory)
   end
 end
 
+NUM_WEB = 2
+
 # All Vagrant configuration is done below. The "2" in Vagrant.configure
 # configures the configuration version (we support older styles for
 # backwards compatibility). Please don't change it unless you know what
@@ -46,25 +48,16 @@ Vagrant.configure(2) do |config|
     end
   end
   
-  config.vm.define "web1" do |web|
-    set_limits web, cpus: 1, memory: 1024
-    web.vm.network "private_network", ip: "10.10.10.11"
-    web.vm.provision "salt" do |salt|
-      salt.bootstrap_options = "-F -c /tmp -i web1"
-      salt.minion_config = "vagrant/web/salt_minion.yml"
-      salt.run_highstate = true
-      salt.colorize = true
-    end
-  end
-  
-  config.vm.define "web2" do |web|
-    set_limits web, cpus: 1, memory: 1024
-    web.vm.network "private_network", ip: "10.10.10.12"
-    web.vm.provision "salt" do |salt|
-      salt.bootstrap_options = "-F -c /tmp -i web2"
-      salt.minion_config = "vagrant/web/salt_minion.yml"
-      salt.run_highstate = true
-      salt.colorize = true
+  (1..NUM_WEB).each do |i|
+    config.vm.define "web#{i}" do |web|
+      set_limits web, cpus: 1, memory: 1024
+      web.vm.network "private_network", ip: "10.10.10.1#{i}"
+      web.vm.provision "salt" do |salt|
+        salt.bootstrap_options = "-F -c /tmp -i web#{i}"
+        salt.minion_config = "vagrant/web/salt_minion.yml"
+        salt.run_highstate = true
+        salt.colorize = true
+      end
     end
   end
   
