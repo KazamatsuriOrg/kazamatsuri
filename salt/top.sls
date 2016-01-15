@@ -12,13 +12,13 @@ base:
     - match: grain
     - docker
     - node
+    - node.grunt-cli
     - postgresql.client
     - nginx
     - nginx.kazamatsuri
     - ghost.web
     - ghost._nginx_old
     - discourse.web
-    - nfs.ghost_content
     - nfs.web
 
   'roles:database':

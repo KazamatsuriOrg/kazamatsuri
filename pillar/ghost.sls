@@ -1,3 +1,2 @@
 ghost:
-  version: 0.7.3
-  zip_sha1: 66134f5b823facabab7dd985dcdd7e591bd9878d
+  version: 248c3da667ee4f347629188e8dc680808e863b39

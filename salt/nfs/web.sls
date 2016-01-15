@@ -11,5 +11,3 @@
     - device: /shared/www
     - require:
       - file: /shared/www
-    - require_in:
-      - service: /etc/systemd/system/ghost.service
