@@ -14,8 +14,9 @@ base:
     - node
     - postgresql.client
     - nginx
+    - nginx.kazamatsuri
     - ghost.web
-    - ghost.nginx
+    - ghost._nginx_old
     - discourse.web
     - nfs.ghost_content
     - nfs.web
