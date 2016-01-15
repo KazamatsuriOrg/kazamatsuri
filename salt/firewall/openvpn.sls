@@ -13,6 +13,7 @@ allow-openvpn-udp:
 #     - chain: INPUT
 #     - in-interface: tun+
 #     - jump: ACCEPT
+#     - save: True
 
 # allow-tun-forward:
 #   iptables.append:
@@ -20,6 +21,7 @@ allow-openvpn-udp:
 #     - chain: FORWARD
 #     - in-interface: tun+
 #     - jump: ACCEPT
+#     - save: True
 
 forward-openvpn-related:
   iptables.append:
@@ -30,6 +32,7 @@ forward-openvpn-related:
     - match: state
     - connstate: "ESTABLISHED,RELATED"
     - jump: ACCEPT
+    - save: True
 
 forward-openvpn:
   iptables.append:
@@ -39,6 +42,7 @@ forward-openvpn:
     - in-interface: tun+
     - out-interface: eth+
     - jump: ACCEPT
+    - save: True
 
 masquerade-openvpn-traffic:
   iptables.append:
@@ -47,3 +51,4 @@ masquerade-openvpn-traffic:
     - source: 172.32.0.0/24
     - out-interface: eth+
     - jump: MASQUERADE
+    - save: True
