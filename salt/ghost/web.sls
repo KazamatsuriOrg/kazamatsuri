@@ -46,6 +46,7 @@ ghost:
     - dir: /srv/ghost
     - require:
       - git: /srv/ghost
+      - cmd: /srv/ghost
 
 /srv/ghost/config.js:
   file.managed:
