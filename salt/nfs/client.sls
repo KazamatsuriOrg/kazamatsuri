@@ -2,7 +2,7 @@ nfs-client:
   pkg.installed:
     - name: nfs-common
 
-/shared/:
+/shared:
   mount.mounted:
     - fstype: nfs4
     - device: "{{ salt['mine.get']('roles:storage', 'private_ip_addrs', expr_form='grain').values()[0][0] }}:/srv/shared"

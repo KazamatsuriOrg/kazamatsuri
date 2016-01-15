@@ -6,14 +6,14 @@ nfs-server:
     - enable: True
     - require:
       - pkg: nfs-server
-      - file: /srv/shared/
+      - file: /srv/shared
       - file: /etc/exports
     - require_in:
-      - mount: /shared/
+      - mount: /shared
     - watch:
       - file: /etc/exports
 
-/srv/shared/:
+/srv/shared:
   file.directory:
     - user: root
     - group: root

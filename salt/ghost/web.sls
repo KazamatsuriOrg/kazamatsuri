@@ -36,7 +36,7 @@ ghost_source:
       - cmd: ghost_source
       - user: ghost_user
 
-/srv/ghost/:
+/srv/ghost:
   # npm.bootstrap:
   #   - user: ghost
   #   - require:
@@ -45,11 +45,11 @@ ghost_source:
   #     - user: ghost_user
   cmd.watch:
     - name: npm install --production
-    - cwd: /srv/ghost/
+    - cwd: /srv/ghost
     - watch:
       - cmd: ghost_source
 
-/srv/ghost/content/:
+/srv/ghost/content:
   file.directory:
     - user: ghost
     - group: ghost
@@ -58,7 +58,7 @@ ghost_source:
       - cmd: ghost_source
 
 {% for dir in ['data', 'apps', 'themes'] %}
-/srv/ghost/content/{{ dir }}/:
+/srv/ghost/content/{{ dir }}:
   {% if not grains.get('vagrant', False) %}
   file.directory:
     - user: ghost
@@ -70,13 +70,13 @@ ghost_source:
     - target: /vagrant/vagrant/srv/ghost/content/{{ dir }}
     - force: True
     - require:
-      - file: /vagrant/vagrant/srv/ghost/content/{{ dir }}/
+      - file: /vagrant/vagrant/srv/ghost/content/{{ dir }}
   {% endif %}
     - require:
-      - file: /srv/ghost/content/
+      - file: /srv/ghost/content
 
 {% if grains.get('vagrant', False) %}
-/vagrant/vagrant/srv/ghost/content/{{ dir }}/:
+/vagrant/vagrant/srv/ghost/content/{{ dir }}:
   file.directory:
     - user: vagrant
     - group: vagrant
@@ -84,12 +84,12 @@ ghost_source:
 
 {% endfor %}
 
-/srv/ghost/content/themes/monologue/:
+/srv/ghost/content/themes/monologue:
   git.latest:
     - name: https://github.com/KazamatsuriOrg/monologue.git
     - target: /srv/ghost/content/themes/monologue
     - require:
-      - file: /srv/ghost/content/themes/
+      - file: /srv/ghost/content/themes
 
 /srv/ghost/content/storage/ghost-s3/index.js:
   file.managed:
@@ -108,20 +108,20 @@ ghost-s3-storage:
   file.managed:
     - source: salt://ghost/ghost.service
     - require:
-      - cmd: /srv/ghost/
-      - git: /srv/ghost/content/themes/monologue/
+      - cmd: /srv/ghost
+      - git: /srv/ghost/content/themes/monologue
       - file: /srv/ghost/config.js
-      - file: /srv/ghost/content/themes/
-      - file: /srv/ghost/content/data/
-      - file: /srv/ghost/content/apps/
+      - file: /srv/ghost/content/themes
+      - file: /srv/ghost/content/data
+      - file: /srv/ghost/content/apps
 
 ghost:
   service.running:
     - enable: True
     - require:
       - file: /etc/systemd/system/ghost.service
-      - cmd: /srv/ghost/
+      - cmd: /srv/ghost
     - watch:
       - file: /etc/systemd/system/ghost.service
       - file: /srv/ghost/config.js
-      - cmd: /srv/ghost/
+      - cmd: /srv/ghost

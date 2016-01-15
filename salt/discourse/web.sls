@@ -6,7 +6,7 @@ include:
     - source: salt://discourse/web.yml
     - template: jinja
     - require:
-      - git: /srv/discourse/
+      - git: /srv/discourse
 
 discourse_web:
   cmd.run:

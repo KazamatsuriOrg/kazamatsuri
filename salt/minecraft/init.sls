@@ -13,7 +13,7 @@ minecraft:
       - file: /etc/systemd/system/minecraft.service
       - cmd: build_spigot
 
-/srv/minecraft/:
+/srv/minecraft:
   file.directory:
     - user: minecraft
     - group: minecraft
@@ -27,7 +27,7 @@ minecraft:
     - user: minecraft
     - require:
       - user: minecraft
-      - file: /srv/minecraft/
+      - file: /srv/minecraft
 
 build_spigot:
   cmd.run:

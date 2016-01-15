@@ -37,7 +37,7 @@ patch-pkitool:
     - source: salt://openvpn/server.conf
     - template: jinja
 
-/etc/openvpn/keys/:
+/etc/openvpn/keys:
   cmd.run:
     - name: 'source /root/easy-rsa-vars.sh && /usr/share/easy-rsa/clean-all'
     - shell: /bin/bash
@@ -53,7 +53,7 @@ patch-pkitool:
     - shell: /bin/bash
     - creates: /etc/openvpn/keys/dh2048.pem
     - require:
-      - cmd: /etc/openvpn/keys/
+      - cmd: /etc/openvpn/keys
 
 /etc/openvpn/keys/ca.crt:
   cmd.run:
@@ -61,7 +61,7 @@ patch-pkitool:
     - shell: /bin/bash
     - creates: /etc/openvpn/keys/ca.crt
     - require:
-      - cmd: /etc/openvpn/keys/
+      - cmd: /etc/openvpn/keys
 
 /etc/openvpn/keys/server.crt:
   cmd.run:
@@ -71,4 +71,4 @@ patch-pkitool:
     - env:
       - KEY_CN: Jena
     - require:
-      - cmd: /etc/openvpn/keys/
+      - cmd: /etc/openvpn/keys
