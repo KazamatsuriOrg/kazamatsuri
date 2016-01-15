@@ -16,3 +16,8 @@ unzip:
 
 apt-transport-https:
   pkg.installed
+
+/etc/rc.local:
+  file.managed:
+    - source: salt://common/rc.local.sh
+    - mode: 755
