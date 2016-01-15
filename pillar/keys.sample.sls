@@ -1,8 +1,30 @@
-ghost:
-  db_password: SOME_SECRET
+kazamatsuri:
+  ghost:
+    db_password: SOME_SECRET
 
-discourse:
-  db_password: SOME_SECRET
+  discourse:
+    db_password: SOME_SECRET
+
+  s3:
+    access_key_id:
+    access_key:
+    bucket: kazamatsuri
+    region: us-west-1
+    cdn:
+
+rokkenjima:
+  ghost:
+    db_password: SOME_SECRET
+
+  discourse:
+    db_password: SOME_SECRET
+
+  s3:
+    access_key_id:
+    access_key:
+    bucket: rokkenjima
+    region: us-west-1
+    cdn:
 
 smtp:
   password: SOME_SECRET
@@ -22,10 +44,3 @@ newrelic:
 
 syslog:
   host:
-
-s3:
-  access_key_id:
-  access_key:
-  bucket:
-  region:
-  cdn:

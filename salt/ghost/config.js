@@ -29,20 +29,20 @@ config = {
       connection: {
         host: '{{ salt['mine.get']('roles:database', 'private_ip_addrs', expr_form='grain').values()[0][0] }}',
         user: 'ghost',
-        password: '{{ pillar['ghost']['db_password'] }}',
+        password: '{{ pillar['kazamatsuri']['ghost']['db_password'] }}',
         database: 'ghost',
       },
       debug: false
     },
-    {% if pillar.get('s3', {}).get('bucket', None) %}
+    {% if pillar['kazamatsuri']['s3']['access_key_id'] %}
     storage: {
       active: 'ghost-s3',
       'ghost-s3': {
-        accessKeyId: '{{ pillar['s3']['access_key_id'] }}',
-        secretAccessKey: '{{ pillar['s3']['access_key'] }}',
-        bucket: '{{ pillar['s3']['bucket'] }}',
-        region: '{{ pillar['s3']['region'] }}',
-        assetHost: '{{ pillar['s3']['cdn'] }}/'
+        accessKeyId: '{{ pillar['kazamatsuri']['s3']['access_key_id'] }}',
+        secretAccessKey: '{{ pillar['kazamatsuri']['s3']['access_key'] }}',
+        bucket: '{{ pillar['kazamatsuri']['s3']['bucket'] }}',
+        region: '{{ pillar['kazamatsuri']['s3']['region'] }}',
+        assetHost: '{{ pillar['kazamatsuri']['s3']['cdn'] }}/'
       }
     },
     {% endif %}
@@ -87,20 +87,20 @@ config = {
         connection: {
           host: '{{ salt['mine.get']('roles:database', 'private_ip_addrs', expr_form='grain').values()[0][0] }}',
           user: 'ghost',
-          password: '{{ pillar['ghost']['db_password'] }}',
+          password: '{{ pillar['kazamatsuri']['ghost']['db_password'] }}',
           database: 'ghost',
         },
         debug: false
       },
-      {% if pillar.get('s3', {}).get('bucket', None) %}
+      {% if pillar['kazamatsuri']['s3']['access_key_id'] %}
       storage: {
         active: 'ghost-s3',
         'ghost-s3': {
-          accessKeyId: '{{ pillar['s3']['access_key_id'] }}',
-          secretAccessKey: '{{ pillar['s3']['access_key'] }}',
-          bucket: '{{ pillar['s3']['bucket'] }}',
-          region: '{{ pillar['s3']['region'] }}',
-          assetHost: '{{ pillar['s3']['cdn'] }}/'
+          accessKeyId: '{{ pillar['kazamatsuri']['s3']['access_key_id'] }}',
+          secretAccessKey: '{{ pillar['kazamatsuri']['s3']['access_key'] }}',
+          bucket: '{{ pillar['kazamatsuri']['s3']['bucket'] }}',
+          region: '{{ pillar['kazamatsuri']['s3']['region'] }}',
+          assetHost: '{{ pillar['kazamatsuri']['s3']['cdn'] }}/'
         }
       },
       {% endif %}

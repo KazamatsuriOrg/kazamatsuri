@@ -47,7 +47,7 @@ hooks:
   after_postgres:
     - exec:
         stdin: |
-          alter user discourse with password '{{ pillar['discourse']['db_password'] }}';
+          alter user discourse with password '{{ pillar['kazamatsuri']['discourse']['db_password'] }}';
         cmd: su - postgres -c 'psql discourse'
 
         raise_on_fail: false

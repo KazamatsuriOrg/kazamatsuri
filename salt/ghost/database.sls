@@ -2,7 +2,7 @@ ghost_db_user:
   postgres_user.present:
     - name: ghost
     - login: True
-    - password: {{ pillar['ghost']['db_password'] }}
+    - password: {{ pillar['kazamatsuri']['ghost']['db_password'] }}
     - require:
       - pkg: postgresql
 
