@@ -1,4 +1,4 @@
 smtp:
-  host: smtp.mandrillapp.com
+  host: smtp.sendgrid.net
   port: 587
-  username: webmaster@kazamatsuri.org
+  username: kazamatsuri
