@@ -74,6 +74,26 @@ volumes:
 ## The docker manager plugin allows you to one-click upgrade Discouse
 ## http://discourse.example.com/admin/docker
 hooks:
+  {%- if pillar['sites'][1:] %}
+  before_bundle_exec:
+    - file:
+        path: $home/config/multisite.yml
+        contents: |
+          {% for site in pillar['sites'][1:] %}
+          {{ site['id'] }}:
+           adapter: postgresql
+           database: {{ site['id'] }}_discourse
+           pool: 25
+           timeout: 5000
+           db_id: {{ loop.index + 1 }}
+           host_names:
+             - {{ site['domain'] }}
+             - {{ site['domain_local'] }}
+          {% endfor %}
+  after_bundle_exec:
+    - exec: |
+        cd /var/www/discourse && sudo -E -u discourse bundle exec rake multisite:migrate
+  {% endif %}
   after_code:
     - exec:
         cd: $home/plugins
