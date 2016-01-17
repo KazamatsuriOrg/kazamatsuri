@@ -26,6 +26,10 @@ ghost:
     - target: /srv/kazamatsuri/ghost/content/themes/monologue
     - require:
       - file: /srv/kazamatsuri/ghost/content
+    - require_in:
+      - service: ghost@kazamatsuri
+    - watch_in:
+      - service: ghost@kazamatsuri
 
 
 
@@ -39,14 +43,12 @@ ghost@{{ site['id'] }}:
       - git: /srv/{{ site['id'] }}/ghost
       - npm: /srv/{{ site['id'] }}/ghost
       - cmd: /srv/{{ site['id'] }}/ghost
-      - git: /srv/{{ site['id'] }}/ghost/content/themes/monologue
       - file: /srv/{{ site['id'] }}/ghost/content/storage/ghost-s3/index.js
     - watch:
       - file: /etc/systemd/system/ghost@.service
       - git: /srv/{{ site['id'] }}/ghost
       - npm: /srv/{{ site['id'] }}/ghost
       - cmd: /srv/{{ site['id'] }}/ghost
-      - git: /srv/{{ site['id'] }}/ghost/content/themes/monologue
       - file: /srv/{{ site['id'] }}/ghost/config.js
 
 /srv/{{ site['id'] }}/ghost:
@@ -83,6 +85,9 @@ ghost@{{ site['id'] }}:
   file.managed:
     - source: salt://ghost/config.js
     - template: jinja
+    - context:
+        site: {{ site['id'] }}
+        domain: {{ site['domain_local'] if grains.get('vagrant', False) else site['domain'] }}
     - require:
       - git: /srv/{{ site['id'] }}/ghost
 

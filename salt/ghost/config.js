@@ -11,7 +11,7 @@ config = {
   // When running Ghost in the wild, use the production environment.
   // Configure your URL and mail settings here
   production: {
-    url: 'http://kazamatsuri.{{ 'local' if grains.get('vagrant', False) else 'org' }}',
+    url: 'http://{{ domain }}',
     mail: {
       transport: 'SMTP',
       host: '{{ pillar['smtp']['host'] }}',
@@ -28,27 +28,27 @@ config = {
       client: 'pg',
       connection: {
         host: '{{ salt['mine.get']('roles:database', 'private_ip_addrs', expr_form='grain').values()[0][0] }}',
-        user: '{{ pillar['kazamatsuri']['ghost']['db_user'] }}',
-        password: '{{ pillar['kazamatsuri']['ghost']['db_password'] }}',
-        database: '{{ pillar['kazamatsuri']['ghost']['db_name'] }}',
+        user: '{{ pillar[site]['ghost']['db_user'] }}',
+        password: '{{ pillar[site]['ghost']['db_password'] }}',
+        database: '{{ pillar[site]['ghost']['db_name'] }}',
       },
       debug: false
     },
-    {% if pillar['kazamatsuri']['s3']['access_key_id'] %}
+    {% if pillar[site]['s3']['access_key_id'] %}
     storage: {
       active: 'ghost-s3',
       'ghost-s3': {
-        accessKeyId: '{{ pillar['kazamatsuri']['s3']['access_key_id'] }}',
-        secretAccessKey: '{{ pillar['kazamatsuri']['s3']['access_key'] }}',
-        bucket: '{{ pillar['kazamatsuri']['s3']['bucket'] }}',
-        region: '{{ pillar['kazamatsuri']['s3']['region'] }}',
-        assetHost: '{{ pillar['kazamatsuri']['s3']['cdn'] }}/'
+        accessKeyId: '{{ pillar[site]['s3']['access_key_id'] }}',
+        secretAccessKey: '{{ pillar[site]['s3']['access_key'] }}',
+        bucket: '{{ pillar[site]['s3']['bucket'] }}',
+        region: '{{ pillar[site]['s3']['region'] }}',
+        assetHost: '{{ pillar[site]['s3']['cdn'] }}/'
       }
     },
     {% endif %}
     server: {
       socket: {
-        path: '/tmp/ghost_kazamatsuri.sock',
+        path: '/tmp/ghost_{{ site }}.sock',
         permissions: '0666',
       },
     },
@@ -89,20 +89,20 @@ config = {
         connection: {
           host: '{{ salt['mine.get']('roles:database', 'private_ip_addrs', expr_form='grain').values()[0][0] }}',
           user: 'ghost',
-          password: '{{ pillar['kazamatsuri']['ghost']['db_password'] }}',
+          password: '{{ pillar[site]['ghost']['db_password'] }}',
           database: 'ghost',
         },
         debug: false
       },
-      {% if pillar['kazamatsuri']['s3']['access_key_id'] %}
+      {% if pillar[site]['s3']['access_key_id'] %}
       storage: {
         active: 'ghost-s3',
         'ghost-s3': {
-          accessKeyId: '{{ pillar['kazamatsuri']['s3']['access_key_id'] }}',
-          secretAccessKey: '{{ pillar['kazamatsuri']['s3']['access_key'] }}',
-          bucket: '{{ pillar['kazamatsuri']['s3']['bucket'] }}',
-          region: '{{ pillar['kazamatsuri']['s3']['region'] }}',
-          assetHost: '{{ pillar['kazamatsuri']['s3']['cdn'] }}/'
+          accessKeyId: '{{ pillar[site]['s3']['access_key_id'] }}',
+          secretAccessKey: '{{ pillar[site]['s3']['access_key'] }}',
+          bucket: '{{ pillar[site]['s3']['bucket'] }}',
+          region: '{{ pillar[site]['s3']['region'] }}',
+          assetHost: '{{ pillar[site]['s3']['cdn'] }}/'
         }
       },
       {% endif %}
