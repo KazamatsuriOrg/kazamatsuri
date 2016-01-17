@@ -17,6 +17,7 @@ base:
     - postgresql.client
     - nginx
     - nginx.kazamatsuri
+    - nginx.rokkenjima
     - ghost.web
     - ghost._nginx_old
     - discourse.web
