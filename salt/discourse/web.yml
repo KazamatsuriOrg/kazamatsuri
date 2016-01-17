@@ -40,7 +40,7 @@ env:
   DISCOURSE_DEVELOPER_EMAILS: 'webmaster@kazamatsuri.org'
   ##
   ## TODO: The domain name this Discourse instance will respond to
-  DISCOURSE_HOSTNAME: 'forum.kazamatsuri.org'
+  DISCOURSE_HOSTNAME: {{ 'forum.kazamatsuri.local' if grains.get('vagrant', False) else 'forum.kazamatsuri.org'}}
   ##
   ## TODO: The mailserver this Discourse instance will use
   DISCOURSE_SMTP_ADDRESS: {{ pillar['smtp']['host'] }}
@@ -81,14 +81,18 @@ hooks:
         contents: |
           {% for site in pillar['sites'][1:] %}
           {{ site['id'] }}:
-           adapter: postgresql
-           database: {{ site['id'] }}_discourse
-           pool: 25
-           timeout: 5000
-           db_id: {{ loop.index + 1 }}
-           host_names:
-             - {{ site['domain'] }}
-             - {{ site['domain_local'] }}
+            adapter: postgresql
+            database: {{ site['id'] }}_discourse
+            host: {{ salt['mine.get']('roles:database', 'private_ip_addrs', expr_form='grain').values()[0][0] }}
+            port: 5433
+            username: discourse
+            password: {{ pillar['kazamatsuri']['discourse']['db_password'] }}
+            pool: 25
+            timeout: 5000
+            db_id: {{ loop.index + 1 }}
+            host_names:
+              - forum.{{ site['domain'] }}
+              - forum.{{ site['domain_local'] }}
           {% endfor %}
   after_bundle_exec:
     - exec: |
