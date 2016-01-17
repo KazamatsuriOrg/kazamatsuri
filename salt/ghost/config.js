@@ -28,9 +28,9 @@ config = {
       client: 'pg',
       connection: {
         host: '{{ salt['mine.get']('roles:database', 'private_ip_addrs', expr_form='grain').values()[0][0] }}',
-        user: 'ghost',
+        user: '{{ pillar['kazamatsuri']['ghost']['db_user'] }}',
         password: '{{ pillar['kazamatsuri']['ghost']['db_password'] }}',
-        database: 'ghost',
+        database: '{{ pillar['kazamatsuri']['ghost']['db_name'] }}',
       },
       debug: false
     },
