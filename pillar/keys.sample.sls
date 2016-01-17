@@ -27,6 +27,9 @@ rokkenjima:
     cdn:
 
 smtp:
+  host: smtp.example.com
+  port: 587
+  username: username@example.com
   password: SOME_SECRET
 
 haproxy:
