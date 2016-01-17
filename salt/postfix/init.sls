@@ -30,7 +30,7 @@ postfix:
       - pkg: postfix
 
 /etc/aliases.db:
-  cmd.run:
+  cmd.wait:
     - name: /usr/sbin/postalias /etc/aliases
     - creates: /etc/postfix/sasl_passwd.db
     - watch:
@@ -49,7 +49,7 @@ postfix:
       - pkg: postfix
 
 /etc/postfix/sasl_passwd.db:
-  cmd.run:
+  cmd.wait:
     - name: /usr/sbin/postmap /etc/postfix/sasl_passwd
     - creates: /etc/postfix/sasl_passwd.db
     - watch:
