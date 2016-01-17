@@ -1,14 +1,14 @@
-ghost_db_user:
+{% for site in pillar['sites'] %}
+ghost@{{ site['id'] }}_db:
   postgres_user.present:
-    - name: ghost
+    - name: {{ pillar[site['id']]['ghost']['db_user'] }}
     - login: True
-    - password: {{ pillar['kazamatsuri']['ghost']['db_password'] }}
+    - password: {{ pillar[site['id']]['ghost']['db_password'] }}
     - require:
       - pkg: postgresql
-
-ghost_db:
   postgres_database.present:
-    - name: ghost
-    - owner: ghost
+    - name: {{ pillar[site['id']]['ghost']['db_name'] }}
+    - owner: {{ pillar[site['id']]['ghost']['db_user'] }}
     - require:
-      - postgres_user: ghost_db_user
+      - postgres_user: ghost@{{ site['id'] }}_db
+{% endfor %}
