@@ -32,7 +32,6 @@ postfix:
 /etc/aliases.db:
   cmd.wait:
     - name: /usr/sbin/postalias /etc/aliases
-    - creates: /etc/postfix/sasl_passwd.db
     - watch:
       - file: /etc/aliases
     - require:
@@ -51,7 +50,6 @@ postfix:
 /etc/postfix/sasl_passwd.db:
   cmd.wait:
     - name: /usr/sbin/postmap /etc/postfix/sasl_passwd
-    - creates: /etc/postfix/sasl_passwd.db
     - watch:
       - file: /etc/postfix/sasl_passwd
     - require:
