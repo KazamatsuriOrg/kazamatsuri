@@ -47,9 +47,11 @@ config = {
     },
     {% endif %}
     server: {
-      host: '127.0.0.1',
-      port: '2368'
-    }
+      socket: {
+        path: '/tmp/ghost_kazamatsuri.sock',
+        permissions: '0666',
+      },
+    },
   },
 
   // ### Development **(default)**
