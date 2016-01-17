@@ -8,5 +8,5 @@ kazamatsuri:
 
 rokkenjima:
   ghost:
-    db_user: beatrice    # who else would be the ghost of rokkenjima?
-    db_name: rokkenjima
+    db_user: rokkenjima_ghost
+    db_name: rokkenjima_ghost
