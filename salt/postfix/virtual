@@ -1,0 +1,3 @@
+{% for addr, dest in pillar['smtp']['virtual'].items() -%}
+{{ addr }} {{ dest }}
+{% endfor -%}

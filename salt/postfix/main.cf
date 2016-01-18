@@ -24,22 +24,19 @@ smtpd_use_tls=yes
 smtpd_tls_session_cache_database = btree:${data_directory}/smtpd_scache
 smtp_tls_session_cache_database = btree:${data_directory}/smtp_scache
 
-# SASL authentication
-smtp_sasl_auth_enable = yes
-smtp_sasl_password_maps = hash:/etc/postfix/sasl_passwd
-smtp_sasl_security_options = noanonymous
-
 # See /usr/share/doc/postfix/TLS_README.gz in the postfix-doc package for
 # information on enabling SSL in the smtp client.
 
 smtpd_relay_restrictions = permit_mynetworks permit_sasl_authenticated defer_unauth_destination
-myhostname = kazamatsuri.org
+myhostname = mail.{{ pillar['smtp']['mailname'] }}
+mydomain = {{ pillar['smtp']['mailname'] }}
+virtual_alias_maps = hash:/etc/postfix/virtual
 alias_maps = hash:/etc/aliases
 alias_database = hash:/etc/aliases
 myorigin = /etc/mailname
-mydestination = {% for site in pillar['sites'] %}{{ site['domain_local' if grains.get('vagrant', False) else 'domain'] }}, forum.{{ site['domain_local' if grains.get('vagrant', False) else 'domain'] }}, {% endfor %}localhost
-relayhost = [{{ pillar['smtp']['host'] }}]
-mynetworks = 127.0.0.0/8 [::ffff:127.0.0.0]/104 [::1]/128
+mydestination = {{ pillar['smtp']['domains']|join(', ') }} localhost
+#relayhost =
+mynetworks = 127.0.0.0/8 10.0.0.0/8
 mailbox_command = procmail -a "$EXTENSION"
 mailbox_size_limit = 0
 recipient_delimiter = +
