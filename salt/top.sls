@@ -48,7 +48,6 @@ base:
   'roles:mail':
     - match: grain
     - postfix
-    - dovecot
     - firewall.smtp
 
   'roles:voice':
