@@ -3,5 +3,5 @@ kazamatsuri.sublime-workspace
 pillar/keys.sls
 pillar/local.sls
 
-/vagrant/srv/ghost/content/*
+/vagrant/shared/*
 !.gitkeep

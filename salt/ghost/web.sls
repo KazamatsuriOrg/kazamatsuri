@@ -21,6 +21,15 @@ ghost:
 
 
 /srv/kazamatsuri/ghost/content/themes/monologue:
+  {% if grains.get('vagrant', False) %}
+  file.symlink:
+    - target: /vagrant/vagrant/shared/monologue
+    - force: True
+    - require:
+      - file: /srv/kazamatsuri/ghost/content
+    - require_in:
+      - git: /srv/kazamatsuri/ghost/content/themes/monologue
+  {% endif %}
   git.latest:
     - name: https://github.com/KazamatsuriOrg/monologue.git
     - target: /srv/kazamatsuri/ghost/content/themes/monologue
