@@ -14,4 +14,7 @@
 # Force NFS mounts to attach; this appears to be a Debian bug
 mount -a
 
+# Reload firewall rules
+iptables-restore < /etc/iptables/rules.v4
+
 exit 0
