@@ -22,7 +22,7 @@ allow-loopback:
     - table: filter
     - chain: INPUT
     - proto: all
-    - in-interface: lo
+    - source: 127.0.0.1
     - jump: ACCEPT
     - save: True
 
