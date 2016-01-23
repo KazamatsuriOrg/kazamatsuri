@@ -85,7 +85,7 @@ hooks:
             adapter: postgresql
             database: {{ site['id'] }}_discourse
             host: {{ salt['mine.get']('roles:database', 'private_ip_addrs', expr_form='grain').values()[0][0] }}
-            port: 5433
+            port: 15432
             username: discourse
             password: {{ pillar['kazamatsuri']['discourse']['db_password'] }}
             pool: 25
