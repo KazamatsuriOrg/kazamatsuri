@@ -9,8 +9,8 @@ templates:
   - "templates/syslog.papertrail.template.yml"
 
 expose:
-  - "5433:5432"
-  - "6379:6379"
+  - "{{ grains['ip4_interfaces']['eth1'][0] }}:15432:5432"
+  - "{{ grains['ip4_interfaces']['eth1'][0] }}:16379:6379"
   # - "2221:22"
 
 # any extra arguments for Docker?

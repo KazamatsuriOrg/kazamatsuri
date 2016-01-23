@@ -32,8 +32,9 @@ env:
   DISCOURSE_DB_USERNAME: discourse
   DISCOURSE_DB_PASSWORD: {{ pillar['kazamatsuri']['discourse']['db_password'] }}
   DISCOURSE_DB_HOST: "{{ salt['mine.get']('roles:database', 'private_ip_addrs', expr_form='grain').values()[0][0] }}"
-  DISCOURSE_DB_PORT: 5433
+  DISCOURSE_DB_PORT: 15432
   DISCOURSE_REDIS_HOST: "{{ salt['mine.get']('roles:database', 'private_ip_addrs', expr_form='grain').values()[0][0] }}"
+  DISCOURSE_REDIS_PORT: 16379
   ##
   ## TODO: List of comma delimited emails that will be made admin and developer
   ## on initial signup example 'user1@example.com,user2@example.com'
