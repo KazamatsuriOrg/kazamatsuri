@@ -2,7 +2,7 @@
 # vi: set ft=ruby :
 
 # Helper for boilerplate involved with setting resource limits across providers
-def set_limits(box, cpus: cpus, memory: memory)
+def set_limits(box, cpus: 1, memory: 512)
   box.vm.provider "virtualbox" do |vb|
     vb.memory = memory
     vb.cpus = cpus
