@@ -23,11 +23,11 @@ params:
   ##
   ## On 1GB installs set to 128MB (to leave room for other processes)
   ## on a 4GB instance you may raise to 1GB
-  #db_shared_buffers: "256MB"
+  db_shared_buffers: "256MB"
   #
   ## Set higher on large instances it defaults to 10MB, for a 3GB install 40MB is a good default
   ## this improves sorting performance, but adds memory usage per-connection
-  #db_work_mem: "40MB"
+  db_work_mem: "40MB"
   #
 
 env:
