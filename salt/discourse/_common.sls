@@ -13,3 +13,8 @@
     - template: jinja
     - require:
       - git: /srv/discourse
+
+/etc/cron.daily/discourse-cleanup:
+  file.managed:
+    - source: salt://discourse/cron/discourse-cleanup.sh
+    - mode: 755
