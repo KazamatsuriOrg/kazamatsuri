@@ -73,7 +73,7 @@ ghost@{{ site['id'] }}:
     - name: |
         git clean -ffdx core
         rm -rf node_modules
-        npm install --no-optional --production
+        npm install --no-optional
         grunt init
         grunt prod
         grunt clean
