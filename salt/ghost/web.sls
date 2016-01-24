@@ -78,6 +78,7 @@ ghost@{{ site['id'] }}:
         grunt prod
         npm dedupe
         npm shrinkwrap
+        rm -rf core/built/**/test-* core/client core/test
     - cwd: /srv/{{ site['id'] }}/ghost
     - require:
       - npm: grunt-cli
