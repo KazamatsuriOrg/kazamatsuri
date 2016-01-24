@@ -73,9 +73,12 @@ ghost@{{ site['id'] }}:
     - name: |
         git clean -ffdx core
         rm -rf node_modules
-        npm install --no-optional
+        npm install --no-optional --production
         grunt init
         grunt prod
+        grunt clean
+        npm dedupe
+        npm shrinkwrap
     - cwd: /srv/{{ site['id'] }}/ghost
     - require:
       - npm: grunt-cli
