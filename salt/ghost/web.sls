@@ -77,8 +77,6 @@ ghost@{{ site['id'] }}:
         npm install --no-optional
         grunt init
         grunt prod
-        npm dedupe
-        npm shrinkwrap
         rm -rf core/built/**/test-* core/client core/test
     - cwd: /srv/{{ site['id'] }}/ghost
     - require:
