@@ -72,6 +72,7 @@ ghost@{{ site['id'] }}:
   cmd.wait:
     - name: |
         git clean -ffdx core
+        git checkout core
         rm -rf node_modules
         npm install --no-optional
         grunt init
