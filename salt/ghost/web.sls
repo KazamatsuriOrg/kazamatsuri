@@ -76,7 +76,6 @@ ghost@{{ site['id'] }}:
         npm install --no-optional
         grunt init
         grunt prod
-        grunt clean
         npm dedupe
         npm shrinkwrap
     - cwd: /srv/{{ site['id'] }}/ghost
