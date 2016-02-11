@@ -6,7 +6,7 @@ After=network.target
 [Service]
 User=ghost
 Group=ghost
-Environment=NODE_ENV=production
+Environment=NODE_ENV=production GHOST_NODE_VERSION_CHECK=false
 WorkingDirectory=/srv/%i/ghost
 ExecStart=/usr/bin/node /srv/%i/ghost/index.js
 TimeoutSec=10
