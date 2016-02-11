@@ -109,16 +109,11 @@ config = {
       // #### Server
       // Can be host & port (default), or socket
       server: {
-          // Host to be passed to node's `net.Server#listen()`
-          host: '0.0.0.0',
-          // Port to be passed to node's `net.Server#listen()`, for iisnode set this to `process.env.PORT`
-          port: '2368'
-        },
-      // #### Paths
-      // Specify where your content directory lives
-      paths: {
-        contentPath: '/srv/ghost/content/'
-      }
+        // Host to be passed to node's `net.Server#listen()`
+        host: '0.0.0.0',
+        // Port to be passed to node's `net.Server#listen()`, for iisnode set this to `process.env.PORT`
+        port: '2368'
+      },
     },
 
   // **Developers only need to edit below here**
