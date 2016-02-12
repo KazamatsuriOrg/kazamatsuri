@@ -21,7 +21,6 @@ base:
     - ghost.web
     - ghost._nginx_old
     - discourse.web
-    - nfs.web
 
   'roles:database':
     - match: grain
