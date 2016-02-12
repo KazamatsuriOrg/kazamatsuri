@@ -1,13 +1,7 @@
 /shared/www:
-  file.directory:
-    - makedirs: True
-    - mode: 755
+  file.absent: []
 
 /srv/www:
-  mount.mounted:
-    - fstype: none
-    - opts: bind
-    - mkmnt: True
+  mount.unmounted:
     - device: /shared/www
-    - require:
-      - file: /shared/www
+    - persist: True
