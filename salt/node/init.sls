@@ -14,3 +14,8 @@ nodejs:
   pkg.installed:
     - require:
       - pkgrepo: nodesource
+
+n:
+  npm.installed:
+    - require:
+      - pkg: nodejs
