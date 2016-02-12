@@ -63,6 +63,9 @@ volumes:
       host: /srv/discourse/shared/web
       guest: /shared
   - volume:
+      host: /shared/discourse/shared/web/uploads
+      guest: /shared/uploads
+  - volume:
       host: /srv/discourse/shared/web/log/var-log
       guest: /var/log
 

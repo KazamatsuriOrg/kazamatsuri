@@ -18,3 +18,11 @@
   file.managed:
     - source: salt://discourse/cron/discourse-cleanup.sh
     - mode: 755
+
+/shared/discourse:
+  file.directory: []
+
+/shared/discourse/shared:
+  file.directory:
+    - require:
+      - file: /shared/discourse
