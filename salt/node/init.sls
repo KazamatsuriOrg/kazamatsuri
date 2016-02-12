@@ -5,8 +5,7 @@ nodesource-0.12:
 nodesource:
   pkgrepo.managed:
     - name: deb https://deb.nodesource.com/node_4.x jessie main
-    - keyid: 9FD3B784BC1C6FC31A8A0A1C1655A0AB68576280
-    - keyserver: pgp.mit.edu
+    - key_url: https://deb.nodesource.com/gpgkey/nodesource.gpg.key
     - require:
       - pkgrepo: nodesource-0.12
       - pkg: apt-transport-https
