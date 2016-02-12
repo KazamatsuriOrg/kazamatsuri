@@ -15,7 +15,27 @@ nodejs:
     - require:
       - pkgrepo: nodesource
 
-n:
-  npm.installed:
+/usr/local/nvm:
+  git.latest:
+    - name: https://github.com/creationix/nvm.git
+    - target: /usr/local/nvm
+    - rev: v{{ pillar['node']['nvm_version'] }}
+
+{% for version in pillar['node']['versions'] %}
+nodejs-{{ version }}:
+  cmd.run:
+    - name: ". /usr/local/nvm/nvm.sh && nvm install {{ version }}"
+    - shell: /bin/bash
+    - creates: /usr/local/nvm/versions/node/v{{ version }}
     - require:
-      - pkg: nodejs
+      - git: /usr/local/nvm
+    - watch_in:
+      - cmd: nvm-use
+{% endfor %}
+
+nvm-use:
+  cmd.watch:
+    - name: ". /usr/local/nvm/nvm.sh && nvm use {{ pillar['node']['use_version'] }}"
+    - shell: /bin/bash
+    - require:
+      - cmd: nodejs-{{ pillar['node']['use_version'] }}

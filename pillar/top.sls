@@ -1,6 +1,7 @@
 base:
   '*':
     - sites
+    - node
     - discourse
     - ghost
     - cloud
