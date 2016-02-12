@@ -1,5 +1,7 @@
 /shared/www:
-  file.absent: []
+  file.absent:
+    - require:
+      - mount: /srv/www
 
 /srv/www:
   mount.unmounted:
