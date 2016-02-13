@@ -7,6 +7,9 @@ dovecot:
     - enable: True
     - require:
       - pkg: dovecot
+    - watch:
+      - file: /etc/dovecot/dovecot.conf
+      - file: /etc/dovecot/conf.d
 
 /etc/dovecot/dovecot.conf:
   file.managed:
@@ -15,7 +18,7 @@ dovecot:
       - pkg: dovecot
 
 /etc/dovecot/conf.d:
-  file.directory:
+  file.recurse:
     - source: salt://dovecot/conf.d
     - require:
       - pkg: dovecot
