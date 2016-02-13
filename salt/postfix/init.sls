@@ -8,6 +8,7 @@ postfix:
     - reload: True
     - require:
       - pkg: postfix
+      - pkg: libsasl
     - watch:
       - file: /etc/mailname
       - file: /etc/postfix/main.cf
@@ -15,6 +16,18 @@ postfix:
       - cmd: /etc/aliases
       - cmd: /etc/postfix/virtual
       - cmd: /etc/postfix/sasl_passwd
+
+postfix-sasl-access:
+  group.present:
+    - name: sasl
+    - system: True
+    - addusers:
+      - postfix
+    - require:
+      - pkg: libsasl
+      - pkg: postfix
+    - watch_in:
+      - service: postfix
 
 /etc/mailname:
   file.managed:
