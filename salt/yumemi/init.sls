@@ -5,7 +5,8 @@ yumemi:
   service.running:
     - enable: True
   {% else %}
-  service.stopped:
+  service.dead:
+    - enable: False
   {% endif %}
     - require:
       - git: /srv/kazamatsuri/yumemi
