@@ -1,0 +1,18 @@
+[Unit]
+Description=Yumemi
+After=network.target
+
+[Service]
+User=nobody
+Group=nobody
+Environment=HUBOT_DISCORD_EMAIL='{{ pillar['yumemi']['discord']['email'] }}' HUBOT_DISCORD_PASSWORD='{{ pillar['yumemi']['discord']['password'] }}'
+ExecStart=/srv/kazamatsuri/yumemi/bin/hubot -a discord
+WorkingDirectory=/srv/kazamatsuri/yumemi
+StdOut=syslog
+StdErr=syslog
+TimeoutSec=10
+Restart=always
+RestartSec=1
+
+[Install]
+WantedBy=multi-user.target

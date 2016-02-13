@@ -61,3 +61,9 @@ base:
     - java
     - minecraft
     - firewall.minecraft
+  
+  'roles:hubot':
+    - match: grain
+    - node
+    - sites
+    - yumemi
