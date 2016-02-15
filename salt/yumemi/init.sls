@@ -1,7 +1,5 @@
-# Note: We don't want this running on the dev server as well, until I have a
-# separate test account on Discord, or we'll start getting duplicate replies
 yumemi:
-  {% if not grains.get('vagrant', False) %}
+  {% if pillar['yumemi']['discord']['email'] %}
   service.running:
     - enable: True
   {% else %}
