@@ -25,18 +25,22 @@ yumemi:
     - force: True
     - require:
       - file: /srv/kazamatsuri
-    - require_in:
-      - git: /srv/kazamatsuri/yumemi
+  {% else %}
+  file.directory:
+    - user: www-data
+    - group: www-data
+    - require:
+      - file: /srv/kazamatsuri
   {% endif %}
   git.latest:
     - name: "https://github.com/KazamatsuriOrg/Yumemi.git"
     - target: /srv/kazamatsuri/yumemi
+    - user: www-data
     - require:
-      - file: /srv/kazamatsuri
+      - file: /srv/kazamatsuri/yumemi
   cmd.watch:
     - name: "npm install"
     - cwd: /srv/kazamatsuri/yumemi
-    - require:
-      - git: /srv/kazamatsuri/yumemi
+    - user: www-data
     - watch:
       - git: /srv/kazamatsuri/yumemi
