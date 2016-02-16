@@ -17,18 +17,6 @@ postfix:
       - cmd: /etc/postfix/virtual
       - cmd: /etc/postfix/sasl_passwd
 
-postfix-sasl-access:
-  group.present:
-    - name: sasl
-    - system: True
-    - addusers:
-      - postfix
-    - require:
-      - pkg: libsasl
-      - pkg: postfix
-    - watch_in:
-      - service: postfix
-
 /etc/mailname:
   file.managed:
     - contents: {{ pillar['smtp']['mailname'] }}
