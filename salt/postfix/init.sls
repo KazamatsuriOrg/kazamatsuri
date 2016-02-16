@@ -2,13 +2,11 @@ postfix:
   pkg.installed:
     - pkgs:
       - postfix
-      - libsasl2-2
   service.running:
     - enable: True
     - reload: True
     - require:
       - pkg: postfix
-      - pkg: libsasl
     - watch:
       - file: /etc/mailname
       - file: /etc/postfix/main.cf
