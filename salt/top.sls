@@ -7,6 +7,7 @@ base:
     - swap
     - newrelic
     - firewall
+    - fail2ban
     - logging
 
   'roles:web':
