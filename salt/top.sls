@@ -47,7 +47,6 @@ base:
   'roles:mail':
     - match: grain
     - postfix
-    - libsasl
     - dovecot
     - firewall.smtp
 
