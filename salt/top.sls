@@ -2,6 +2,7 @@ base:
   '*':
     - common
     - dotdeb
+    - sshd
     - nfs.client
     - swap
     - newrelic
