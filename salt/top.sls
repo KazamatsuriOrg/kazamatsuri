@@ -19,7 +19,6 @@ base:
     - nginx.kazamatsuri
     - nginx.rokkenjima
     - ghost.web
-    - ghost._nginx_old
     - discourse.web
 
   'roles:database':
