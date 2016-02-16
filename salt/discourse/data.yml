@@ -51,17 +51,17 @@ hooks:
         cmd: su - postgres -c 'psql discourse'
 
         raise_on_fail: false
-{% for site in pillar['sites'][1:] %}
-    - exec: sudo -u postgres createdb {{ pillar[site]['id'] }}_discourse || exit 0
+{% for site in pillar['sites'][1:] %}{% if 'discourse' in pillar[site]['use'] %}
+    - exec: sudo -u postgres createdb {{ site }}_discourse || exit 0
     - exec:
          stdin: |
-           grant all privileges on database {{ pillar[site]['id'] }}_discourse to discourse;
-         cmd: sudo -u postgres psql {{ pillar[site]['id'] }}_discourse
+           grant all privileges on database {{ site }}_discourse to discourse;
+         cmd: sudo -u postgres psql {{ site }}_discourse
          raise_on_fail: false
     - exec: |
-       /bin/bash -c 'sudo -u postgres psql {{ pillar[site]['id'] }}_discourse <<< "alter schema public owner to discourse;"'
+       /bin/bash -c 'sudo -u postgres psql {{ site }}_discourse <<< "alter schema public owner to discourse;"'
     - exec: |
-       /bin/bash -c 'sudo -u postgres psql {{ pillar[site]['id'] }}_discourse <<< "create extension if not exists hstore;"'
+       /bin/bash -c 'sudo -u postgres psql {{ site }}_discourse <<< "create extension if not exists hstore;"'
     - exec: |
-       /bin/bash -c 'sudo -u postgres psql {{ pillar[site]['id'] }}_discourse <<< "create extension if not exists pg_trgm;"'
-{% endfor %}
+       /bin/bash -c 'sudo -u postgres psql {{ site }}_discourse <<< "create extension if not exists pg_trgm;"'
+{% endif %}{% endfor %}

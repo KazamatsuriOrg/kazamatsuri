@@ -83,21 +83,21 @@ hooks:
     - file:
         path: $home/config/multisite.yml
         contents: |
-          {% for site in pillar['sites'][1:] %}
-          {{ pillar[site]['id'] }}:
+          {% for site in pillar['sites'][1:] %}{% if 'discourse' in pillar[site]['use'] %}
+          {{ site }}:
             adapter: postgresql
-            database: {{ pillar[site]['id'] }}_discourse
+            database: {{ site }}_discourse
             host: {{ salt['mine.get']('roles:database', 'private_ip_addrs', expr_form='grain').values()[0][0] }}
             port: 15432
             username: discourse
             password: {{ pillar['kazamatsuri']['discourse']['db_password'] }}
             pool: 25
             timeout: 5000
-            db_id: {{ loop.index + 1 }}
+            db_id: {{ pillar[site]['discourse']['db_id'] }}
             host_names:
               - forum.{{ pillar[site]['domain'] }}
               - forum.{{ pillar[site]['domain_local'] }}
-          {% endfor %}
+          {% endif %}{% endfor %}
   after_bundle_exec:
     - exec: |
         cd /var/www/discourse && sudo -E -u discourse bundle exec rake multisite:migrate
