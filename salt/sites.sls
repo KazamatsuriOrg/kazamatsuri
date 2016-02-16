@@ -1,21 +1,21 @@
 {% for site in pillar['sites'] %}
-/srv/{{ site.id }}:
+/srv/{{ site }}:
   file.directory: []
 
-/srv/{{ site.id }}/www:
+/srv/{{ site }}/www:
   file.symlink:
-    - target: /shared/{{ site.id }}/www
+    - target: /shared/{{ site }}/www
     - force: True
     - require:
-      - file: /shared/{{ site.id }}/www
+      - file: /shared/{{ site }}/www
 
-/shared/{{ site.id }}:
+/shared/{{ site }}:
   file.directory: []
 
-/shared/{{ site.id }}/www:
+/shared/{{ site }}/www:
   file.directory:
     - user: www-data
     - mode: 755
     - require:
-      - file: /shared/{{ site.id }}
+      - file: /shared/{{ site }}
 {% endfor %}

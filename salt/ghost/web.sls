@@ -44,31 +44,31 @@ ghost:
 
 {% for site in pillar['sites'] %}
 
-ghost@{{ site['id'] }}:
+ghost@{{ site }}:
   service.running:
     - enable: True
     - require:
       - file: /etc/systemd/system/ghost@.service
-      - git: /srv/{{ site['id'] }}/ghost
-      - npm: /srv/{{ site['id'] }}/ghost
-      - cmd: /srv/{{ site['id'] }}/ghost
-      - file: /srv/{{ site['id'] }}/ghost/content/storage/ghost-s3/index.js
+      - git: /srv/{{ site }}/ghost
+      - npm: /srv/{{ site }}/ghost
+      - cmd: /srv/{{ site }}/ghost
+      - file: /srv/{{ site }}/ghost/content/storage/ghost-s3/index.js
     - watch:
       - file: /etc/systemd/system/ghost@.service
-      - git: /srv/{{ site['id'] }}/ghost
-      - npm: /srv/{{ site['id'] }}/ghost
-      - cmd: /srv/{{ site['id'] }}/ghost
-      - file: /srv/{{ site['id'] }}/ghost/config.js
+      - git: /srv/{{ site }}/ghost
+      - npm: /srv/{{ site }}/ghost
+      - cmd: /srv/{{ site }}/ghost
+      - file: /srv/{{ site }}/ghost/config.js
 
-/srv/{{ site['id'] }}/ghost:
+/srv/{{ site }}/ghost:
   git.latest:
     - name: https://github.com/TryGhost/Ghost.git
-    - target: /srv/{{ site['id'] }}/ghost
+    - target: /srv/{{ site }}/ghost
     - branch: stable
     - rev: {{ pillar['ghost']['version'] }}
     - force_clone: True
     - require:
-      - file: /srv/{{ site['id'] }}
+      - file: /srv/{{ site }}
   cmd.wait:
     - name: |
         git clean -ffdx core
@@ -78,55 +78,54 @@ ghost@{{ site['id'] }}:
         grunt init
         grunt prod
         rm -rf core/built/**/test-* core/client core/test
-    - cwd: /srv/{{ site['id'] }}/ghost
+    - cwd: /srv/{{ site }}/ghost
     - require:
       - npm: grunt-cli
     - watch:
-      - git: /srv/{{ site['id'] }}/ghost
+      - git: /srv/{{ site }}/ghost
   npm.installed:
     - pkgs:
       - ghost-s3-storage
       - pg
-    - dir: /srv/{{ site['id'] }}/ghost
+    - dir: /srv/{{ site }}/ghost
     - require:
-      - git: /srv/{{ site['id'] }}/ghost
-      - cmd: /srv/{{ site['id'] }}/ghost
+      - git: /srv/{{ site }}/ghost
+      - cmd: /srv/{{ site }}/ghost
 
-/srv/{{ site['id'] }}/ghost/config.js:
+/srv/{{ site }}/ghost/config.js:
   file.managed:
     - source: salt://ghost/config.js
     - template: jinja
     - context:
-        site: {{ site['id'] }}
-        domain: {{ site['domain_local'] if grains.get('vagrant', False) else site['domain'] }}
+        site: {{ site }}
     - require:
-      - git: /srv/{{ site['id'] }}/ghost
+      - git: /srv/{{ site }}/ghost
 
-/srv/{{ site['id'] }}/ghost/content:
+/srv/{{ site }}/ghost/content:
   file.directory:
     - force: True
     - require:
-      - git: /srv/{{ site['id'] }}/ghost
+      - git: /srv/{{ site }}/ghost
 
-/srv/{{ site['id'] }}/ghost/content/storage/ghost-s3/index.js:
+/srv/{{ site }}/ghost/content/storage/ghost-s3/index.js:
   file.managed:
     - contents: |
         'use strict';
         module.exports = require('ghost-s3-storage');
     - makedirs: True
     - require:
-      - file: /srv/{{ site['id'] }}/ghost/content
+      - file: /srv/{{ site }}/ghost/content
 
 
 
 {% for dir in ['apps', 'data', 'images', 'themes'] %}
-/srv/{{ site['id'] }}/ghost/content/{{ dir }}:
+/srv/{{ site }}/ghost/content/{{ dir }}:
   file.directory:
     - user: ghost
     - require:
-      - file: /srv/{{ site['id'] }}/ghost/content
+      - file: /srv/{{ site }}/ghost/content
     - require_in:
-      - service: ghost@{{ site['id'] }}
+      - service: ghost@{{ site }}
 {% endfor %}
 
 {% endfor %}

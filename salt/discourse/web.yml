@@ -84,9 +84,9 @@ hooks:
         path: $home/config/multisite.yml
         contents: |
           {% for site in pillar['sites'][1:] %}
-          {{ site['id'] }}:
+          {{ pillar[site]['id'] }}:
             adapter: postgresql
-            database: {{ site['id'] }}_discourse
+            database: {{ pillar[site]['id'] }}_discourse
             host: {{ salt['mine.get']('roles:database', 'private_ip_addrs', expr_form='grain').values()[0][0] }}
             port: 15432
             username: discourse
@@ -95,8 +95,8 @@ hooks:
             timeout: 5000
             db_id: {{ loop.index + 1 }}
             host_names:
-              - forum.{{ site['domain'] }}
-              - forum.{{ site['domain_local'] }}
+              - forum.{{ pillar[site]['domain'] }}
+              - forum.{{ pillar[site]['domain_local'] }}
           {% endfor %}
   after_bundle_exec:
     - exec: |
