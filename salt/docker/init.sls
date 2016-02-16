@@ -19,3 +19,22 @@ docker:
     - enable: True
     - require:
       - pkg: docker
+      - file: /etc/default/docker
+      - file: /etc/docker/daemon.json
+    - watch:
+      - file: /etc/default/docker
+      - file: /etc/docker/daemon.json
+
+/etc/default/docker:
+  file.managed:
+    - source: salt://docker/docker
+    - template: jinja
+    - require:
+      - pkg: docker
+
+/etc/docker/daemon.json:
+  file.managed:
+    - source: salt://docker/daemon.json
+    - template: jinja
+    - require:
+      - pkg: docker
