@@ -9,8 +9,6 @@ Environment="HUBOT_DISCORD_EMAIL={{ pillar['yumemi']['discord']['email'] }}"
 Environment="HUBOT_DISCORD_PASSWORD={{ pillar['yumemi']['discord']['password'] }}"
 ExecStart=/srv/kazamatsuri/yumemi/bin/hubot -a discord
 WorkingDirectory=/srv/kazamatsuri/yumemi
-StdOut=syslog
-StdErr=syslog
 TimeoutSec=10
 Restart=always
 RestartSec=1
