@@ -9,9 +9,11 @@ yumemi:
     - require:
       - git: /srv/kazamatsuri/yumemi
       - file: /etc/systemd/system/yumemi.service
+      - file: /srv/kazamatsuri/yumemi/env
     - watch:
       - git: /srv/kazamatsuri/yumemi
       - file: /etc/systemd/system/yumemi.service
+      - file: /srv/kazamatsuri/yumemi/env
 
 /etc/systemd/system/yumemi.service:
   file.managed:
@@ -43,4 +45,11 @@ yumemi:
     - cwd: /srv/kazamatsuri/yumemi
     - user: www-data
     - watch:
+      - git: /srv/kazamatsuri/yumemi
+
+/srv/kazamatsuri/yumemi/env:
+  file.managed:
+    - source: salt://yumemi/env
+    - template: jinja
+    - require:
       - git: /srv/kazamatsuri/yumemi

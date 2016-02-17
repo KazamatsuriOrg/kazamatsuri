@@ -1,0 +1,2 @@
+HUBOT_DISCORD_EMAIL={{ pillar['yumemi']['discord']['email'] }}
+HUBOT_DISCORD_PASSWORD={{ pillar['yumemi']['discord']['password'] }}

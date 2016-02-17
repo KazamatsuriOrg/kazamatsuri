@@ -5,8 +5,7 @@ After=network.target
 [Service]
 User=www-data
 Group=www-data
-Environment="HUBOT_DISCORD_EMAIL={{ pillar['yumemi']['discord']['email'] }}"
-Environment="HUBOT_DISCORD_PASSWORD={{ pillar['yumemi']['discord']['password'] }}"
+EnvironmentFile=/srv/kazamatsuri/yumemi/env
 ExecStart=/srv/kazamatsuri/yumemi/bin/hubot -a discord
 WorkingDirectory=/srv/kazamatsuri/yumemi
 TimeoutSec=10
