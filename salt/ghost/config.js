@@ -17,7 +17,7 @@ config = {
       host: '{{ pillar['smtp']['host'] }}',
       port: {{ pillar['smtp']['port'] }},
       options: {
-        service: 'Mandrill',
+        service: 'SMTP',
         auth: {
           user: '{{ pillar['smtp']['username'] }}',
           pass: '{{ pillar['smtp']['password'] }}',
