@@ -43,7 +43,6 @@ yumemi:
   cmd.watch:
     - name: "npm install"
     - cwd: /srv/kazamatsuri/yumemi
-    - user: www-data
     - watch:
       - git: /srv/kazamatsuri/yumemi
 
