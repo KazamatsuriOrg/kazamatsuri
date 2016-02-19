@@ -40,7 +40,7 @@ ghost:
     - watch_in:
       - service: ghost@kazamatsuri
   cmd.watch:
-    - name: 'npm install && bower install && rm -rf assets && broccoli build assets'
+    - name: 'npm install && bower install --allow-root && rm -rf assets && broccoli build assets'
     - cwd: /srv/kazamatsuri/ghost/content/themes/monologue
     - watch:
       - git: /srv/kazamatsuri/ghost/content/themes/monologue
