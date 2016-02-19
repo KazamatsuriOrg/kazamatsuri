@@ -30,15 +30,21 @@ ghost:
     - require_in:
       - git: /srv/kazamatsuri/ghost/content/themes/monologue
   {% endif %}
-  git.latest:
-    - name: https://github.com/KazamatsuriOrg/monologue.git
-    - target: /srv/kazamatsuri/ghost/content/themes/monologue
-    - require:
-      - file: /srv/kazamatsuri/ghost/content
-    - require_in:
-      - service: ghost@kazamatsuri
-    - watch_in:
-      - service: ghost@kazamatsuri
+  # git.latest:
+  #   - name: https://github.com/KazamatsuriOrg/monologue.git
+  #   - target: /srv/kazamatsuri/ghost/content/themes/monologue
+  #   - require:
+  #     - file: /srv/kazamatsuri/ghost/content
+  #   - require_in:
+  #     - service: ghost@kazamatsuri
+  #   - watch_in:
+  #     - service: ghost@kazamatsuri
+  cmd.run:
+    - name: 'npm install && rm -rf assets && broccoli build assets'
+    - cwd: /srv/kazamatsuri/ghost/content/themes/monologue
+    - user: ghost
+    # - watch:
+    #   - git: /srv/kazamatsuri/ghost/content/themes/monologue
 
 
 

@@ -16,6 +16,7 @@ base:
     - docker
     - node
     - node.grunt-cli
+    - node.broccoli-cli
     - postgresql.client
     - nginx
     - nginx.kazamatsuri
