@@ -15,8 +15,7 @@ base:
     - sites
     - docker
     - node
-    - node.grunt-cli
-    - node.broccoli-cli
+    - node.utils
     - postgresql.client
     - nginx
     - nginx.kazamatsuri

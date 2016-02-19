@@ -1,2 +1,0 @@
-grunt-cli:
-  npm.installed: []

@@ -1,2 +1,0 @@
-broccoli-cli:
-  npm.installed: []
