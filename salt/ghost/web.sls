@@ -42,7 +42,6 @@ ghost:
   cmd.watch:
     - name: 'npm install && bower install && rm -rf assets && broccoli build assets'
     - cwd: /srv/kazamatsuri/ghost/content/themes/monologue
-    - user: ghost
     - watch:
       - git: /srv/kazamatsuri/ghost/content/themes/monologue
 
