@@ -1,0 +1,6 @@
+{% extends "haproxy/templates/error_base.http" %}
+{% block code %}504 Gateway Time-out{% endblock %}
+{% block title %}504 Gateway Time-out{% endblock %}
+{% block content %}
+The server didn't respond in time.
+{% endblock %}

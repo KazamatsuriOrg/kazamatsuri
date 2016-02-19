@@ -1,0 +1,6 @@
+{% extends "haproxy/templates/error_base.http" %}
+{% block code %}503 Service Unavailable{% endblock %}
+{% block title %}503 Service Unavailable{% endblock %}
+{% block content %}
+No server is available to handle this request.
+{% endblock %}
