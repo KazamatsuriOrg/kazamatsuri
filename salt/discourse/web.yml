@@ -110,7 +110,7 @@ hooks:
           # - git clone https://github.com/discourse/docker_manager.git
           - git clone https://github.com/discourse/discourse-spoiler-alert.git; cd discourse-spoiler-alert; git checkout 1e771f775a6c7e96a255f65ea800b2ec25741ea7; cd ..
           - git clone https://github.com/davidcelis/new_relic-discourse.git
-          # - git clone https://github.com/rux-pizza/discourse-awesome-bbcodes.git
+          - git clone https://github.com/discourse/discourse-bbcode-color.git
 
 ## Remember, this is YAML syntax - you can only have one block with a name
 run:
