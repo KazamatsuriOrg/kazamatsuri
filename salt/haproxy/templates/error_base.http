@@ -1,11 +1,33 @@
-HTTP/1.0 {% block code %}{% endblock %}
+HTTP/1.0 {% block code %}500 Internal Server Error{% endblock %}
 Cache-Control: no-cache
 Connection: close
-Content-Type: text/html
+Content-Type: text/html; charset=utf-8
 
+<!DOCTYPE html>
 <html>
+  <head>
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'>
+    <style>
+      body, html { margin: 0; padding: 0; }
+      body { font-family: "Open Sans", Helvetica, Arial, sans-serif; font-size: 15pt; }
+      a, a:hover, a:focus, a:visited { color: #333; font-weight: bold; text-decoration: none; }
+      h1 { font-variant: small-caps; letter-spacing: 1px; margin-bottom: 8pt; }
+      p { line-height: 1.2em; margin-top: 0; margin-bottom: 10pt; }
+      p.footer { color: #777; font-size: 70%; }
+      .container { max-width: 600px; margin: auto; padding: 10px; }
+      .box { border-left: 3px dotted #ccc; padding-left: 15px; }
+    </style>
+  </head>
   <body>
-    <h1>{% block title %}OVERRIDE TITLE BLOCK PLS{% endblock %}</h1>
-    {% block content %}OVERRIDE CONTENT BLOCK PLS{% endblock %}
+    <div class="container">
+      <div class="box">
+        <h1>{% block title %}OVERRIDE TITLE BLOCK PLS{% endblock %}</h1>
+        {% block content %}OVERRIDE CONTENT BLOCK PLS{% endblock %}
+        <p class="footer">
+          {#Infrastructure managed by <a href="http://kazamatsuri.org/">Kazamatsuri</a>.<br />#}
+          If the problem persists, contact <a href="mailto:uppfinnarn@kazamatsuri.org">uppfinnarn@kazamatsuri.org</a>.
+        </p>
+      </div>
+    </div>
   </body>
 </html>
