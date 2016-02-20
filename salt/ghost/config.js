@@ -14,10 +14,9 @@ config = {
     url: 'http://{{ pillar[site]['domain_local' if grains.get('vagrant', False) else 'domain'] }}',
     mail: {
       transport: 'SMTP',
-      host: '{{ pillar['smtp']['host'] }}',
-      port: {{ pillar['smtp']['port'] }},
       options: {
-        service: 'SMTP',
+        host: '{{ pillar['smtp']['host'] }}',
+        port: {{ pillar['smtp']['port'] }},
         auth: {
           user: '{{ pillar['smtp']['username'] }}',
           pass: '{{ pillar['smtp']['password'] }}',
