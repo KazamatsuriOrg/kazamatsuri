@@ -70,3 +70,14 @@ postfix:
     - name: /usr/sbin/postmap /etc/postfix/sasl_passwd
     - watch:
       - file: /etc/postfix/sasl_passwd
+
+/etc/postfix/relay_hosts:
+  file.managed:
+    - source: salt://postfix/relay_hosts
+    - template: jinja
+    - require:
+      - pkg: postfix
+  cmd.wait:
+    - name: /usr/sbin/postmap /etc/postfix/relay_hosts
+    - watch:
+      - file: /etc/postfix/relay_hosts

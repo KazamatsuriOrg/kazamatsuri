@@ -39,6 +39,7 @@ alias_database = hash:/etc/aliases
 myorigin = /etc/mailname
 mydestination = {{ pillar['smtp']['domains']|join(', ') }} localhost
 #relayhost = [{{ pillar['smtp']['host'] }}]:{{ pillar['smtp']['port'] }}
+sender_dependent_relayhost_maps = hash:/etc/postfix/relay_hosts
 smtp_use_tls = yes
 smtp_sasl_auth_enable = yes
 smtp_sasl_tls_security_options = noanonymous

@@ -1,0 +1,3 @@
+{% for site in pillar['sites'] -%}
+{{ pillar[site]['domain'] }} [{{ pillar['smtp']['host'] }}]:{{ pillar['smtp']['port'] }}
+{% endfor %}
