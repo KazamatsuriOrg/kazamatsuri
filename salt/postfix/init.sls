@@ -14,6 +14,7 @@ postfix:
       - cmd: /etc/aliases
       - cmd: /etc/postfix/virtual
       - cmd: /etc/postfix/sasl_passwd
+      - cmd: /etc/postfix/relay_hosts
 
 /etc/mailname:
   file.managed:
