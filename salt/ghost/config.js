@@ -47,7 +47,7 @@ config = {
     {% endif %}
     server: {
       socket: {
-        path: '/tmp/ghost_{{ site }}.sock',
+        path: '/var/run/ghost/{{ site }}.sock',
         permissions: '0666',
       },
     },

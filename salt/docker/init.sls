@@ -38,3 +38,8 @@ docker:
     - template: jinja
     - require:
       - pkg: docker
+
+docker-py:
+  pip.installed:
+    - require:
+      - pkg: python-pip

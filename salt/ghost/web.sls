@@ -11,14 +11,40 @@ ghost:
     - require:
       - service: ghost
 
-/srv/ghost:
-  file.absent: []
-
 /etc/systemd/system/ghost@.service:
   file.managed:
     - source: salt://ghost/ghost@.service
 
+/srv/ghost:
+  file.directory: []
 
+/srv/ghost/Dockerfile:
+  file.managed:
+    - source: salt://ghost/Dockerfile
+    - template: jinja
+    - require:
+      - file: /srv/ghost
+
+/var/run/ghost:
+  file.directory:
+    - user: www-data
+    - group: www-data
+    - mode: 775
+
+local/ghost:{{ pillar['ghost']['version'] }}:
+  # Bugged: https://github.com/saltstack/salt/issues/31513
+  # dockerng.image_present:
+    # - build: /srv/ghost
+    # - force: True
+  cmd.run:
+    - name: "[[ -z $(docker images -q local/ghost:{{ pillar['ghost']['version'] }}) ]] && docker build -t local/ghost:{{ pillar['ghost']['version'] }} . && echo && echo 'changed=yes comment=\"Image built\"'; true"
+    - cwd: /srv/ghost
+    - shell: /bin/bash
+    - stateful: True
+    - require:
+      - pip: docker-py
+    - watch:
+      - file: /srv/ghost/Dockerfile
 
 /srv/kazamatsuri/ghost/content/themes/monologue:
   {% if grains.get('vagrant', False) %}
@@ -50,52 +76,33 @@ ghost:
 {% for site in pillar['sites'] %}
 
 ghost@{{ site }}:
-  service.running:
-    - enable: True
+  service.dead:
+    - enable: False
     - require:
       - file: /etc/systemd/system/ghost@.service
-      - git: /srv/{{ site }}/ghost
-      - npm: /srv/{{ site }}/ghost
-      - cmd: /srv/{{ site }}/ghost
-      - file: /srv/{{ site }}/ghost/content/storage/ghost-s3/index.js
+
+ghost_{{ site }}:
+  dockerng.running:
+    - image: local/ghost:{{ pillar['ghost']['version'] }}
+    - restart_policy: always
+    - binds:
+      - /srv/{{ site }}/ghost/content:/srv/ghost/content
+      - /srv/{{ site }}/ghost/config.js:/srv/ghost/config.js
+      - /var/run/ghost:/var/run/ghost
+      {% for mount in pillar[site]['ghost'].get('binds', []) -%}
+      - {{ mount }}
+      {% endfor %}
+    - require:
+      - cmd: local/ghost:{{ pillar['ghost']['version'] }}
+      - file: /srv/{{ site }}/ghost/content
+      - file: /srv/{{ site }}/ghost/config.js
+      - file: /var/run/ghost
     - watch:
-      - file: /etc/systemd/system/ghost@.service
-      - git: /srv/{{ site }}/ghost
-      - npm: /srv/{{ site }}/ghost
-      - cmd: /srv/{{ site }}/ghost
+      - cmd: local/ghost:{{ pillar['ghost']['version'] }}
       - file: /srv/{{ site }}/ghost/config.js
 
 /srv/{{ site }}/ghost:
-  git.latest:
-    - name: https://github.com/TryGhost/Ghost.git
-    - target: /srv/{{ site }}/ghost
-    - branch: stable
-    - rev: {{ pillar['ghost']['version'] }}
-    - force_clone: True
-    - require:
-      - file: /srv/{{ site }}
-  cmd.wait:
-    - name: |
-        git clean -ffdx core
-        git checkout core
-        rm -rf node_modules
-        npm install --no-optional
-        grunt init
-        grunt prod
-        rm -rf core/built/**/test-* core/client core/test
-    - cwd: /srv/{{ site }}/ghost
-    - require:
-      - npm: grunt-cli
-    - watch:
-      - git: /srv/{{ site }}/ghost
-  npm.installed:
-    - pkgs:
-      - ghost-s3-storage
-      - pg
-    - dir: /srv/{{ site }}/ghost
-    - require:
-      - git: /srv/{{ site }}/ghost
-      - cmd: /srv/{{ site }}/ghost
+  file.directory: []
 
 /srv/{{ site }}/ghost/config.js:
   file.managed:
@@ -104,13 +111,13 @@ ghost@{{ site }}:
     - context:
         site: {{ site }}
     - require:
-      - git: /srv/{{ site }}/ghost
+      - file: /srv/{{ site }}/ghost
 
 /srv/{{ site }}/ghost/content:
   file.directory:
     - force: True
     - require:
-      - git: /srv/{{ site }}/ghost
+      - file: /srv/{{ site }}/ghost
 
 /srv/{{ site }}/ghost/content/storage/ghost-s3/index.js:
   file.managed:
