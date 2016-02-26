@@ -11,6 +11,9 @@ essentials:
       - zsh
       - curl
 
+python-pip:
+  pkg.installed
+
 unzip:
   pkg.installed
 
