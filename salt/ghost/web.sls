@@ -61,7 +61,7 @@ local/ghost:{{ pillar['ghost']['version'] }}:
     - watch_in:
       - service: ghost@kazamatsuri
   cmd.watch:
-    - name: 'npm install && bower install --allow-root && broccoli build assets_new && mv assets assets_old && mv assets_new assets && rm -rf assets_old'
+    - name: 'npm install && bower install --allow-root && broccoli build assets_new && mv assets assets_old; mv assets_new assets && rm -rf assets_old'
     {% if grains.get('vagrant', False) %}
     - cwd: /vagrant/vagrant/shared/monologue
     - user: vagrant
