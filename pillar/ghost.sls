@@ -7,7 +7,7 @@ kazamatsuri:
     db_name: ghost
     {% if grains.get('vagrant', False) %}
     binds:
-      - /vagrant/shared/monologue:/srv/ghost/content/themes/monologue
+      - /vagrant/vagrant/shared/monologue:/srv/ghost/content/themes/monologue
     {% endif %}
 
 rokkenjima:

@@ -47,18 +47,13 @@ local/ghost:{{ pillar['ghost']['version'] }}:
       - file: /srv/ghost/Dockerfile
 
 /srv/kazamatsuri/ghost/content/themes/monologue:
-  {% if grains.get('vagrant', False) %}
-  file.symlink:
-    - target: /vagrant/vagrant/shared/monologue
-    - force: True
-    - require:
-      - file: /srv/kazamatsuri/ghost/content
-    - require_in:
-      - git: /srv/kazamatsuri/ghost/content/themes/monologue
-  {% endif %}
   git.latest:
     - name: https://github.com/KazamatsuriOrg/monologue.git
+    {% if grains.get('vagrant', False) %}
+    - target: /vagrant/vagrant/shared/monologue
+    {% else %}
     - target: /srv/kazamatsuri/ghost/content/themes/monologue
+    {% endif %}
     - require:
       - file: /srv/kazamatsuri/ghost/content
     - require_in:
@@ -67,7 +62,12 @@ local/ghost:{{ pillar['ghost']['version'] }}:
       - service: ghost@kazamatsuri
   cmd.watch:
     - name: 'npm install && bower install --allow-root && broccoli build assets_new && mv assets assets_old && mv assets_new assets && rm -rf assets_old'
+    {% if grains.get('vagrant', False) %}
+    - cwd: /vagrant/vagrant/shared/monologue
+    - user: vagrant
+    {% else %}
     - cwd: /srv/kazamatsuri/ghost/content/themes/monologue
+    {% endif %}
     - watch:
       - git: /srv/kazamatsuri/ghost/content/themes/monologue
 
