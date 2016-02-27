@@ -9,11 +9,12 @@ base:
     - firewall
     - fail2ban
     - logging
+    - docker
+    - docker.gc
 
   'roles:web':
     - match: grain
     - sites
-    - docker
     - node
     - node.utils
     - postgresql.client
@@ -25,7 +26,6 @@ base:
 
   'roles:database':
     - match: grain
-    - docker
     - postgresql.server
     - ghost.database
     - discourse.data
