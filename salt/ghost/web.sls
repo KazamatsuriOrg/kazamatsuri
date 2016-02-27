@@ -70,6 +70,8 @@ local/ghost:{{ pillar['ghost']['version'] }}:
     {% endif %}
     - watch:
       - git: /srv/kazamatsuri/ghost/content/themes/monologue
+    - watch_in:
+      - dockerng: ghost_kazamatsuri
 
 
 
