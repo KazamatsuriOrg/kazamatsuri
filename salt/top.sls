@@ -17,6 +17,7 @@ base:
     - sites
     - node
     - node.utils
+    - ruby
     - postgresql.client
     - nginx
     - nginx.kazamatsuri
