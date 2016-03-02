@@ -1,4 +1,5 @@
 {% for site in pillar['sites'] %}
+{% if 'ghost' in pillar[site]['use'] %}
 ghost@{{ site }}_db:
   postgres_user.present:
     - name: {{ pillar[site]['ghost']['db_user'] }}
@@ -11,4 +12,5 @@ ghost@{{ site }}_db:
     - owner: {{ pillar[site]['ghost']['db_user'] }}
     - require:
       - postgres_user: ghost@{{ site }}_db
+{% endif %}
 {% endfor %}

@@ -76,6 +76,7 @@ local/ghost:{{ pillar['ghost']['version'] }}:
 
 
 {% for site in pillar['sites'] %}
+{% if 'ghost' in pillar[site]['use'] %}
 
 ghost@{{ site }}:
   service.dead:
@@ -142,4 +143,5 @@ ghost_{{ site }}:
       - service: ghost@{{ site }}
 {% endfor %}
 
+{% endif %}
 {% endfor %}
