@@ -1,6 +1,7 @@
 sites:
   - kazamatsuri
   - rokkenjima
+  - kazoku
 
 kazamatsuri:
   use:
@@ -23,3 +24,13 @@ rokkenjima:
     check_url: '/ghost/'
   domain: rokkenjima.org
   domain_local: rokkenjima.local
+
+kazoku:
+  use:
+    - jekyll
+  jekyll:
+    repo: https://github.com/jekyll/example.git
+  haproxy:
+    check_url: '/'
+  domain: kazoku.co
+  domain_local: kazoku.local
