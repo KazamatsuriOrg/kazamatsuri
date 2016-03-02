@@ -22,6 +22,7 @@ base:
     - nginx
     - nginx.kazamatsuri
     - nginx.rokkenjima
+    - jekyll
     - ghost.web
     - discourse.web
 
