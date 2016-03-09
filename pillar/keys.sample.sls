@@ -52,3 +52,9 @@ yumemi:
   discord:
     email:
     password:
+
+docker-registries:
+  https://index.docker.io/v2/:
+    email: ''
+    password: ''
+    username: ''
