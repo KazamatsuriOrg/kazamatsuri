@@ -47,3 +47,8 @@ newrelic:
 
 syslog:
   host:
+
+yumemi:
+  discord:
+    email:
+    password:
