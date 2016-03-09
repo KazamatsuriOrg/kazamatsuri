@@ -20,6 +20,9 @@ unzip:
 apt-transport-https:
   pkg.installed
 
+resolvconf:
+  pkg.removed
+
 /etc/rc.local:
   file.managed:
     - source: salt://common/rc.local.sh
