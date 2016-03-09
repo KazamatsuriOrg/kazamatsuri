@@ -9,3 +9,5 @@ satellite_setup:
     - tgt: 'P@roles:(web|minecraft)'
     - tgt_type: compound
     - highstate: True
+    - require:
+      - salt: backend_setup
