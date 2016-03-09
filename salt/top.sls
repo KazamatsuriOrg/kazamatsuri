@@ -49,6 +49,7 @@ base:
   'roles:master':
     - match: grain
     - cloud
+    - dnsmasq
     - openvpn
     - firewall.openvpn
 
