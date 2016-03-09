@@ -5,6 +5,8 @@ dnsmasq:
     - reload: True
     - require:
       - pkg: dnsmasq
+    - require_in:
+      - file: /etc/resolv.conf
     - watch:
       - file: /etc/dnsmasq.conf
       - file: /etc/dnsmasq_hosts.conf
