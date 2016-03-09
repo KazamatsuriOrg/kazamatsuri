@@ -45,6 +45,7 @@ base:
   'roles:registry':
     - match: grain
     - docker.registry
+    - discourse.registry
 
   'roles:master':
     - match: grain
