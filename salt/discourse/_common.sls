@@ -14,6 +14,20 @@
     - require:
       - git: /srv/discourse
 
+/srv/discourse/containers/web.yml:
+  file.managed:
+    - source: salt://discourse/web.yml
+    - template: jinja
+    - require:
+      - git: /srv/discourse
+
+/srv/discourse/containers/data.yml:
+  file.managed:
+    - source: salt://discourse/data.yml
+    - template: jinja
+    - require:
+      - git: /srv/discourse
+
 /etc/cron.daily/discourse-cleanup:
   file.managed:
     - source: salt://discourse/cron/discourse-cleanup.sh
