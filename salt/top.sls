@@ -42,6 +42,10 @@ base:
     - match: grain
     - nfs.server
 
+  'roles:registry':
+    - match: grain
+    - docker.registry
+
   'roles:master':
     - match: grain
     - cloud
