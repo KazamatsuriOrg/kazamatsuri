@@ -3,17 +3,9 @@ ghost:
     - gid_from_name: True
     - system: True
     - home: /var/lib/ghost
-  service.dead:
-    - enable: False
-
-/etc/systemd/system/ghost.service:
-  file.absent:
-    - require:
-      - service: ghost
 
 /etc/systemd/system/ghost@.service:
-  file.managed:
-    - source: salt://ghost/ghost@.service
+  file.absent
 
 /srv/ghost:
   file.directory: []
@@ -57,9 +49,9 @@ local/ghost:{{ pillar['ghost']['version'] }}:
     - require:
       - file: /srv/kazamatsuri/ghost/content
     - require_in:
-      - service: ghost@kazamatsuri
+      - dockerng: ghost_kazamatsuri
     - watch_in:
-      - service: ghost@kazamatsuri
+      - dockerng: ghost_kazamatsuri
   cmd.watch:
     - name: 'npm install && bower install --allow-root && broccoli build assets_new && mv assets assets_old; mv assets_new assets && rm -rf assets_old'
     {% if grains.get('vagrant', False) %}
@@ -77,12 +69,6 @@ local/ghost:{{ pillar['ghost']['version'] }}:
 
 {% for site in pillar['sites'] %}
 {% if 'ghost' in pillar[site]['use'] %}
-
-ghost@{{ site }}:
-  service.dead:
-    - enable: False
-    - require:
-      - file: /etc/systemd/system/ghost@.service
 
 ghost_{{ site }}:
   dockerng.running:
@@ -140,7 +126,7 @@ ghost_{{ site }}:
     - require:
       - file: /srv/{{ site }}/ghost/content
     - require_in:
-      - service: ghost@{{ site }}
+      - dockerng: ghost_{{ site }}
 {% endfor %}
 
 {% endif %}
