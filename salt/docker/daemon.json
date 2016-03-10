@@ -1,3 +1,4 @@
 {
-  "log-level": "warn"
+  "log-level": "warn",
+  "bip": "172.17.0.1/16"
 }
