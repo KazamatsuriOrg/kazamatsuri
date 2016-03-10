@@ -17,7 +17,7 @@ registry:
     - binds:
       - /srv/registry/data:/var/lib/registry
     - port_bindings:
-      - 127.0.0.1:5000:5000
+      - {{ grains['ip4_interfaces']['eth1'][0] }}:5000:5000
     - require:
       - dockerng: registry:2
       - file: /srv/registry/data
