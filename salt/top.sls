@@ -70,9 +70,13 @@ base:
     - java
     - minecraft
     - firewall.minecraft
-  
+
   'roles:hubot':
     - match: grain
     - node
     - sites
     - yumemi
+
+  'vagrant:True':
+    - match: grain
+    - vagrant
