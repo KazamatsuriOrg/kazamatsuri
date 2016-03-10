@@ -18,6 +18,7 @@ registry:
       - /srv/registry/data:/var/lib/registry
     - port_bindings:
       - {{ grains['ip4_interfaces']['eth1'][0] }}:5000:5000
+    - restart_policy: always
     - require:
       - dockerng: registry:2
       - file: /srv/registry/data
