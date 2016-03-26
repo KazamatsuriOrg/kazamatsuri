@@ -22,7 +22,7 @@ NUM_WEB = 2
 # you're doing.
 Vagrant.configure(2) do |config|
   # Use a Debian 8.2 base box for all machines
-  config.vm.box = "bento/debian-8.2"
+  config.vm.box = "boxcutter/debian82"
   
   config.vm.define "jena", primary: true do |jena|
     # Set resource limits
