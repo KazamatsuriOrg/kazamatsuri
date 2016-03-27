@@ -21,7 +21,7 @@ rokkenjima:
   discourse:
     db_id: 2
   haproxy:
-    check_url: '/ghost/'
+    check_url: '/'
   domain: rokkenjima.org
   domain_local: rokkenjima.local
 
