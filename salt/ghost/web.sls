@@ -134,6 +134,7 @@ ghost_{{ site }}:
   git.latest:
     - name: https://github.com/TryGhost/Casper.git
     - target: /srv/{{ site }}/ghost/content/themes/casper
+    - force_clone: True
     - require:
       - file: /srv/{{ site }}/ghost/content/themes
 
