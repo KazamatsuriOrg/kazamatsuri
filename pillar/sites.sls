@@ -16,7 +16,7 @@ kazamatsuri:
 
 rokkenjima:
   use:
-    - ghost
+    # - ghost
     - discourse
   discourse:
     db_id: 2
