@@ -86,6 +86,7 @@ ghost_{{ site }}:
       - file: /srv/{{ site }}/ghost/content
       - file: /srv/{{ site }}/ghost/config.js
       - file: /var/run/ghost
+      - git: /srv/{{ site }}/ghost/content/themes/casper
     - watch:
       - cmd: local/ghost:{{ pillar['ghost']['version'] }}
       - file: /srv/{{ site }}/ghost/config.js
@@ -128,6 +129,13 @@ ghost_{{ site }}:
     - require_in:
       - dockerng: ghost_{{ site }}
 {% endfor %}
+
+/srv/{{ site }}/ghost/content/themes/casper:
+  git.latest:
+    - name: https://github.com/TryGhost/Casper.git
+    - target: /srv/{{ site }}/ghost/content/themes/casper
+    - require:
+      - file: /srv/{{ site }}/ghost/content/themes
 
 {% endif %}
 {% endfor %}
