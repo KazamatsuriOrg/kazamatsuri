@@ -1,0 +1,18 @@
+name: Genji
+services:
+  - load: discord
+    jobs:
+      - load: debug
+      - load: verification
+        channel: {{ 'test' if grains.get('vagrant') else 'access-requests' }}
+        grant: Member
+        against: discourse
+        discourse:
+          url: https://forum.rokkenjima.org
+          topic_id: 73
+        lines:
+          success: "Your identity has been verified."
+          name_not_in_post: "You must mention your name as it appears here in your post."
+          error: "An error is preventing me from verifying you. Please try again."
+  # - load: discourse
+  #   url: https://forum.rokkenjima.org

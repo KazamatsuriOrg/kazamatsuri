@@ -18,6 +18,7 @@ rokkenjima:
   use:
     # - ghost
     - discourse
+    - disco
   discourse:
     db_id: 2
   haproxy:

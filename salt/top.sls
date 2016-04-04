@@ -76,6 +76,7 @@ base:
     - node
     - sites
     - yumemi
+    - disco
 
   'vagrant:True':
     - match: grain
