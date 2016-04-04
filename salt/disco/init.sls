@@ -24,6 +24,7 @@ disco_{{ site }}:
     - cmd: run /data/bot.yml
     - user: www-data
     - binds: /srv/{{ site }}/disco:/data
+    - restart_policy: always
     - environment:
       {% if 'discord' in pillar[site]['disco'] %}
       - DISCORD_USERNAME: {{ pillar[site]['disco']['discord']['username'] }}
