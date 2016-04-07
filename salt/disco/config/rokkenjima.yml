@@ -1,6 +1,7 @@
 name: Genji
 services:
   - load: discord
+    game: Chess
     jobs:
       - load: debug
       - load: verification
