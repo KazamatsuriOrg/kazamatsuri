@@ -26,8 +26,7 @@ disco_{{ site }}:
     - binds: /srv/{{ site }}/disco:/data
     - restart_policy: always
     - environment:
-      - DISCORD_USERNAME: {{ pillar[site]['disco'].get('discord', {}).get('username', '') }}
-      - DISCORD_PASSWORD: {{ pillar[site]['disco'].get('discord', {}).get('password', '') }}
+      - DISCORD_TOKEN: {{ pillar[site]['disco'].get('discord', {}).get('token', '') }}
     - watch:
       - dockerng: kazokuco/disco
       - file: /srv/{{ site }}/disco/bot.yml
