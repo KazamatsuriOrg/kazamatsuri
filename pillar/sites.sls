@@ -7,6 +7,7 @@ kazamatsuri:
   use:
     - ghost
     - discourse
+    - disco
   discourse:
     db_id: 1
   haproxy:
