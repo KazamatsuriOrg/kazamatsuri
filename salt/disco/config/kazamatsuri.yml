@@ -2,6 +2,8 @@ name: Yumemi
 services:
   - load: discord
     jobs:
+      - load: discourse
+        url: https://forum.kazamatsuri.org
       - load: verification
         channel: {{ 'test' if grains.get('vagrant') else 'access-requests' }}
         grant: Member
