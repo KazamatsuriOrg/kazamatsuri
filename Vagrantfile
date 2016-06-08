@@ -49,7 +49,7 @@ Vagrant.configure(2) do |config|
   end
   
   (1..NUM_WEB).each do |i|
-    config.vm.define "web#{i}" do |web|
+    config.vm.define "web#{i}", autostart: i==1 do |web|
       set_limits web, cpus: 1, memory: 1024
       web.vm.network "private_network", ip: "10.10.10.1#{i}"
       web.vm.provision "salt" do |salt|
