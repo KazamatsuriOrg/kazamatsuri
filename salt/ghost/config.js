@@ -11,7 +11,7 @@ config = {
   // When running Ghost in the wild, use the production environment.
   // Configure your URL and mail settings here
   production: {
-    url: 'http://{{ pillar[site]['domain_local' if grains.get('vagrant', False) else 'domain'] }}',
+    url: 'https://{{ pillar[site]['domain_local' if grains.get('vagrant', False) else 'domain'] }}',
     mail: {
       transport: 'SMTP',
       options: {
