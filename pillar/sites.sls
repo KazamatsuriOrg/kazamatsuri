@@ -17,7 +17,7 @@ kazamatsuri:
 
 rokkenjima:
   use:
-    # - ghost
+    - ghost
     - discourse
     - disco
   discourse:
