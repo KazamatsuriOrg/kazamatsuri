@@ -6,7 +6,7 @@ services:
         url: https://forum.kazamatsuri.org
       - load: verification
         channel: {{ 'test' if grains.get('vagrant') else 'access-requests' }}
-        grant: Member
+        grant: Dango
         discourse:
           url: https://forum.kazamatsuri.org
           topic_id: 2000

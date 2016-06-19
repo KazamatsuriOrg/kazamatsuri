@@ -6,7 +6,7 @@ services:
       - load: debug
       - load: verification
         channel: {{ 'test' if grains.get('vagrant') else 'access-requests' }}
-        grant: Member
+        grant: Verified
         against: discourse
         discourse:
           url: https://forum.rokkenjima.org
