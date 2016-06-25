@@ -65,6 +65,34 @@ local/ghost:{{ pillar['ghost']['version'] }}:
     - watch_in:
       - dockerng: ghost_kazamatsuri
 
+/srv/rokkenjima/ghost/content/themes/monologue:
+  git.latest:
+    - name: https://github.com/KazamatsuriOrg/monologue.git
+    - branch: rokkenjima
+    {% if grains.get('vagrant', False) %}
+    - target: /vagrant/vagrant/shared/monologue_rokkenjima
+    {% else %}
+    - target: /srv/rokkenjima/ghost/content/themes/monologue
+    {% endif %}
+    - require:
+      - file: /srv/rokkenjima/ghost/content
+    - require_in:
+      - dockerng: ghost_rokkenjima
+    - watch_in:
+      - dockerng: ghost_rokkenjima
+  cmd.watch:
+    - name: 'npm install && bower install --allow-root && broccoli build assets_new && mv assets assets_old; mv assets_new assets && rm -rf assets_old'
+    {% if grains.get('vagrant', False) %}
+    - cwd: /vagrant/vagrant/shared/monologue_rokkenjima
+    - user: vagrant
+    {% else %}
+    - cwd: /srv/rokkenjima/ghost/content/themes/monologue
+    {% endif %}
+    - watch:
+      - git: /srv/rokkenjima/ghost/content/themes/monologue
+    - watch_in:
+      - dockerng: ghost_rokkenjima
+
 
 
 {% for site in pillar['sites'] %}

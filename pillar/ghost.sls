@@ -14,3 +14,7 @@ rokkenjima:
   ghost:
     db_user: rokkenjima_ghost
     db_name: rokkenjima_ghost
+    {% if grains.get('vagrant', False) %}
+    binds:
+      - /vagrant/vagrant/shared/monologue_rokkenjima:/srv/ghost/content/themes/monologue
+    {% endif %}
