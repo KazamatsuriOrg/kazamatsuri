@@ -40,7 +40,7 @@ local/ghost:{{ pillar['ghost']['version'] }}:
 
 /srv/kazamatsuri/ghost/content/themes/monologue:
   git.latest:
-    - name: https://github.com/KazamatsuriOrg/monologue
+    - name: git://github.com/KazamatsuriOrg/monologue
     {% if grains.get('vagrant', False) %}
     - target: /vagrant/vagrant/shared/monologue
     {% else %}
@@ -67,7 +67,7 @@ local/ghost:{{ pillar['ghost']['version'] }}:
 
 /srv/rokkenjima/ghost/content/themes/monologue:
   git.latest:
-    - name: https://github.com/KazokuCo/monologue_rokkenima
+    - name: git://github.com/KazokuCo/monologue_rokkenima
     {% if grains.get('vagrant', False) %}
     - target: /vagrant/vagrant/shared/monologue_rokkenjima
     {% else %}
