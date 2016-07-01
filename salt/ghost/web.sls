@@ -67,8 +67,7 @@ local/ghost:{{ pillar['ghost']['version'] }}:
 
 /srv/rokkenjima/ghost/content/themes/monologue:
   git.latest:
-    - name: https://github.com/KazamatsuriOrg/monologue.git
-    - branch: rokkenjima
+    - name: https://github.com/KazokuCo/monologue_rokkenima.git
     {% if grains.get('vagrant', False) %}
     - target: /vagrant/vagrant/shared/monologue_rokkenjima
     {% else %}
