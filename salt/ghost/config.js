@@ -13,6 +13,7 @@ config = {
   production: {
     url: '{% if grains.get('vagrant', False) %}http://{{ pillar[site]['ghost'].get('prefix', '') }}{{ pillar[site]['domain_local'] }}{% else %}https://{{ pillar[site]['ghost'].get('prefix', '') }}{{ pillar[site]['domain'] }}{% endif %}',
     mail: {
+      from: 'ghost@{{ pillar[site]['domain'] }}',
       transport: 'SMTP',
       options: {
         host: '{{ pillar['smtp']['host'] }}',
