@@ -20,8 +20,6 @@ rokkenjima:
     - ghost
     - discourse
     - disco
-  ghost:
-    prefix: tmp.
   discourse:
     db_id: 2
   haproxy:
